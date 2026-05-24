@@ -83,6 +83,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            width: 100%;
+            overflow-x: auto;
         }
         
         .dots {
@@ -90,7 +92,7 @@
             gap: 6px;
             overflow-x: auto;
             white-space: nowrap;
-            max-width: 100%;
+            flex-shrink: 0;
         }
         
         .dot {
