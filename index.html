@@ -1165,5 +1165,73 @@
                         </div>
                     </div>
                 </div>
+
+        <script>
+        // 打字机效果
+        function typeWriter() {
+            const elements = document.querySelectorAll('.typing');
+            elements.forEach((el, index) => {
+                const text = el.getAttribute('data-text');
+                if (text) {
+                    el.textContent = '';
+                    let i = 0;
+                    function type() {
+                        if (i < text.length) {
+                            el.textContent += text.charAt(i);
+                            i++;
+                            setTimeout(type, 100 + Math.random() * 50);
+                        }
+                    }
+                    setTimeout(type, index * 500);
+                }
+            });
+        }
+        
+        // 页面加载后执行打字效果
+        document.addEventListener('DOMContentLoaded', typeWriter);
+        
+        // 加载保存的主题
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeButton(savedTheme);
+        
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateThemeButton(next);
+        }
+        
+        function updateThemeButton(theme) {
+            const btn = document.querySelector('button[onclick="toggleTheme()"]');
+            if (btn) {
+                btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+        
+        function showDate(date) {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            setTimeout(() => {
+                const selected = document.getElementById('screen-' + date);
+                if (selected) {
+                    selected.classList.add('active');
+                }
+            }, 50);
+            
+            const tabs = document.querySelectorAll('.date-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.textContent.includes(date)) {
+                    tab.classList.add('active');
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>
