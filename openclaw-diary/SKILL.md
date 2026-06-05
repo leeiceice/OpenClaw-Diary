@@ -1,207 +1,42 @@
----
-name: openclaw-diary
-version: 1.0.0
-description: |
-  Set up and manage OpenClaw auto learning diary. Used for:
-  (1) Help users fork OpenClaw-Diary repository
-  (2) Connect the forked repo to OpenClaw
-  (3) Configure daily cron task to auto-write diary
-  (4) Deploy to GitHub Pages
----
+# OpenClaw-Diary 五层结构
 
-# 🦞 OpenClaw-Diary Setup Guide
+> 来源：2026-06-05 21:46 Lee 立 / 小龙虾设计
+> 与 Lee 个人日记 (~/Obsidian/日记/) **完全隔离**。本系统**只记录小龙虾的迭代成长**。
 
-Help users set up OpenClaw auto learning diary with this complete workflow.
+## 层级定义
 
-## ⚠️ Important: Language Response
+| 层 | 命名 | 周期 | 答的问题 | 路径 | cron |
+|----|------|------|---------|------|------|
+| L0 | 日记原文 | 每天 | 今天发生了什么 | `entries/YYYY-MM-DD.md` | `0eaef122` OpenClaw-Daily (21:10) |
+| L1 | 每周分析 | 每周 | 模式识别 | `weekly-analysis/2026-Wnn.md` | `a2bcd085` L1-weekly-analysis (周日 22:00) |
+| L2 | 每月趋势 | 每月 | 演变方向 | `monthly-trend/YYYY-MM.md` | 待建 (月底 23:00) |
+| L3 | 综合分析 | 季度 | 深度挖掘 | `comprehensive/YYYY-Qn.md` | 待建 (季度末) |
+| L4 | 概念实体 | 持续 | 主题积累 | `concepts/{主题}.md` | 内嵌 (L1-L3 调用) |
 
-**Always respond in the same language as the user is speaking!**
-- If user writes in Chinese → respond in Chinese
-- If user writes in English → respond in English
-- Detect language from user's message and match it
+## 隔离原则（铁律）
 
-## Trigger Conditions
+- **只读**小龙虾自己的记忆：`MEMORY.md` + `memory/YYYY-MM-DD.md` + `proactivity/daily-working-log.md` + L0 entries
+- **绝对不读** Lee 个人日记 `~/Obsidian/日记/`
+- AI 日志内容**不暴露 Lee 私人信息**（如具体事件、情绪、私事场景）
+- 任何推送目标**不含 Lee DM**（除非 L1-reminder-cron 等显式 reminder 任务）
 
-Activate when user mentions:
-- "setup diary" / "设置日记"
-- "fork OpenClaw-Diary"
-- "auto write diary" / "自动写日记"
-- "daily learning log" / "每日学习记录"
-- "let AI write diary" / "让 AI 写日记"
+## 触发与推送
 
-## Complete Workflow
+- L0 触发：每天 21:10，跑完 DM Lee (ou_e7a18...)
+- L1 触发：周日 22:00，跑完 DM Lee (简短摘要) + 推进化群 (详细)
+- L1 提醒：周六 18:00 DM Lee 让他补 L0 (`4fbbf209` L1-reminder-cron)
+- L2/L3：待建，节奏由 Lee 拍板
 
-### Step 1: Guide User to Fork the Repo
-
-Tell user to fork on GitHub:
+## 数据流
 
 ```
-Please fork the repo:
-1. Visit https://github.com/YAI-Lab/OpenClaw-Diary
-2. Click "Fork" button
-3. Select your account, complete fork
+  每天 L0 ->  weekly L1 -> monthly L2 -> quarterly L3
+                |
+              L4 concepts (跨时间主题累积)
 ```
 
-### Step 2: Get User's Fork URL
+## 关联系统
 
-Ask for the forked repo URL, format:
-```
-https://github.com/your-username/OpenClaw-Diary
-```
-
-### Step 3: Modify index.html for Personalization (IMPORTANT!)
-
-**After cloning the repo, MUST modify:**
-
-1. **Change page title**: Replace OpenClaw-Diary with user's desired name
-2. **Replace robot Logo**: Change 🤖 to 🦞
-3. **Change robot name**: Replace with user's robot name
-
-```bash
-# Clone repo
-git clone https://github.com/username/OpenClaw-Diary.git
-cd OpenClaw-Diary
-
-# Replace robot name (based on user input)
-sed -i 's/OpenClaw/YourRobotName/g' index.html
-
-# Replace emoji
-sed -i 's/🤖/🦞/g' index.html
-```
-
-**Example modification:**
-```html
-<!-- Before -->
-<title>OpenClaw-Diary</title>
-<h1>🤖 OpenClaw's Learning Diary</h1>
-
-<!-- After -->
-<title>MyAI Diary</title>
-<h1>🦞 小龙的学习日记</h1>
-```
-
-### Step 4: Get GitHub Token
-
-If GitHub token not configured, user needs to create:
-
-1. Visit https://github.com/settings/tokens
-2. Click "Generate new token (classic)"
-3. Check `repo` permission
-4. Generate and save token
-
-**Important**: Must tell user the purpose when getting token, and how to revoke.
-
-### Step 5: Configure Daily Cron Task
-
-Use cron or heartbeat to configure daily task:
-
-**Method A: Cron Task**
-```bash
-# Run daily at UTC 1:00 (9:00 Beijing time)
-openclaw cron add "0 1 * * *" "Daily Learning Diary" "Read latest AI news, track GitHub stars, generate report and push to OpenClaw-Diary repo"
-```
-
-**Method B: Heartbeat Task**
-Add to HEARTBEAT.md:
-```markdown
-## Daily Learning Report
-- Research latest AI/tech/politics news
-- Track GitHub repo stars growth (if user has repos)
-- Generate report in user's language
-- Push to OpenClaw-Diary
-```
-
-### Track GitHub Stars Growth
-
-As part of the daily report, optionally track GitHub stars:
-
-```bash
-# Get current stars
-curl -s https://api.github.com/repos/owner/repo | jq '.stargazers_count'
-
-# Track daily growth
-# Store in a simple JSON file or append to diary
-```
-
-### Step 6: Push to Repo
-
-```bash
-# Add remote
-git remote add user https://github.com/username/OpenClaw-Diary.git
-
-# Commit changes
-git add index.html
-git commit -m "docs: $(date '+%Y-%m-%d') learning diary"
-git push user main
-```
-
-### Step 7: Enable GitHub Pages
-
-1. Go to user's forked repo
-2. Settings → Pages
-3. Source: Deploy from a branch
-4. Branch: main, folder: / (root)
-5. Save, wait for deployment
-
-## Daily Diary Content Template
-
-Content format to push:
-
-```html
-<!-- Date Navigation -->
-<div class="date-tabs">
-  <button onclick="showDate('2026-03-03')">📅 2026-03-03</button>
-</div>
-
-<!-- Daily Content -->
-<div class="screen" id="screen-2026-03-03">
-  <div class="entry">
-    <div class="entry-bar">
-      <span class="entry-filename">~/2026-03-03/learning.md</span>
-    </div>
-    <div class="entry-body">
-      <div class="quote-box">
-        <div class="quote-title">💡 Today's Learning</div>
-        <p>Today's learning content...</p>
-      </div>
-      <div class="quote-box">
-        <div class="quote-title">⭐ GitHub Stars Growth</div>
-        <ul>
-          <li>openclaw/openclaw: 1200 ⬆️ (+15 this week)</li>
-          <li>YAI-Lab/OpenClaw-Diary: 45 ⬆️ (+5 today)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-```
-
-## Privacy Protection (MUST FOLLOW)
-
-**Strictly prohibit leaking:**
-- User's real name, ID card, phone number
-- User's password, API Key, Token
-- User's private conversation content
-
-**Operating principles:**
-- All content must be published with user consent
-- When uncertain, ask user first
-
-## Configuration
-
-| Config | Description | How to Get |
-|--------|-------------|------------|
-| FORK_URL | User's forked repo | User provides |
-| GITHUB_TOKEN | GitHub PAT | User creates |
-| CRON_SCHEDULE | Task schedule | Default UTC 1:00 |
-
-## Checklist
-
-After setup, confirm:
-- [ ] User forked repo
-- [ ] Got fork URL
-- [ ] Modified index.html (replaced 🦞)
-- [ ] Got GitHub Token
-- [ ] Configured daily task
-- [ ] GitHub Pages enabled
-- [ ] Test push successful
+- **不是**：记忆五层 (MEMORY.md v3.4) — 那是给小龙虾**记得** Lee 说过什么
+- **是**：Diary 五层 — 让小龙虾**了解自己**、迭代成长
+- 两个系统**数据源不同、目标不同**，严格隔离
