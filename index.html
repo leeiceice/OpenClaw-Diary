@@ -9,35 +9,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* GitHub Light 配色 */
             --bg: #ffffff;
-            --fg: #1e1e1e;
-            --muted: #6b7280;
-            --border: #e5e7eb;
-            --key-blue: #086DAD;
+            --fg: #24292f;
+            --muted: #656d76;
+            --border: #d0d7de;
+            --key-blue: #0969da;
             --orange: #f97316;
-            --green: #22c55e;
-            --blue: #3b82f6;
+            --green: #1a7f37;
+            --blue: #0969da;
+            --hover-bg: #f6f8fa;
             --dot-red: #ff5f56;
             --dot-yellow: #ffbd2e;
             --dot-green: #27c93f;
         }
         
-        [data-theme="light"] {
-            --bg: #ffffff;
-            --fg: #1e1e1e;
-            --muted: #6b7280;
-            --border: #e5e7eb;
-        }
-        
         [data-theme="dark"] {
-            --bg: #1e1e1e;
-            --fg: #e5e5e5;
-            --muted: #9ca3af;
-            --border: #374151;
-            --key-blue: #60a5fa;
-            --orange: #fb923c;
-            --green: #4ade80;
-            --blue: #60a5fa;
+            /* GitHub Dark 配色（冷蓝） */
+            --bg: #0d1117;
+            --fg: #e6edf3;
+            --muted: #7d8590;
+            --border: #30363d;
+            --key-blue: #58a6ff;
+            --orange: #fb8500;
+            --green: #3fb950;
+            --blue: #58a6ff;
+            --hover-bg: #161b22;
             --dot-red: #ff5f56;
             --dot-yellow: #ffbd2e;
             --dot-green: #27c93f;
@@ -176,7 +173,7 @@
         
         .quote-box {
             border-left: 2px solid var(--key-blue);
-            background: #f8fafc;
+            background: var(--hover-bg);
             padding: 12px 16px;
             border-radius: 0 6px 6px 0;
             margin: 12px 0;
