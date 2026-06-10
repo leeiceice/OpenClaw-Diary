@@ -1,0 +1,448 @@
+{
+  "minimax/MiniMax-M3": {
+    "T1_code": {
+      "score": 10,
+      "max": 10,
+      "note": "5/5 用例通过",
+      "details": [
+        [
+          "2",
+          "True",
+          "True",
+          "True"
+        ],
+        [
+          "17",
+          "True",
+          "True",
+          "True"
+        ],
+        [
+          "1",
+          "False",
+          "False",
+          "True"
+        ],
+        [
+          "-7",
+          "False",
+          "False",
+          "True"
+        ],
+        [
+          "100",
+          "False",
+          "False",
+          "True"
+        ]
+      ],
+      "reply_preview": "```python\ndef is_prime(n: int) -> bool:\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    i = 3\n    while i * i <= n:\n        if n % i =",
+      "latency_s": 9.37,
+      "usage": {
+        "input": 293,
+        "output": 139,
+        "cacheRead": 45682,
+        "cacheWrite": 0,
+        "total": 46114
+      },
+      "reply_length": 391
+    },
+    "T2_summary": {
+      "score": 9,
+      "max": 10,
+      "note": "9/10 关键事实；字数 140 (合规)",
+      "hits": [
+        "小李",
+        "深圳",
+        "StarFeather",
+        "1万",
+        "30天",
+        "100KB",
+        "22%",
+        "3家上市公司",
+        "v2.0"
+      ],
+      "misses": [
+        "2026年第四季度"
+      ],
+      "length_ok": true,
+      "reply_preview": "【摘要】2026年5月，深圳工程师小李发布轻量Web框架StarFeather，30天GitHub Star破1万。框架主打<100KB、零依赖，RPS比Express.js快22%。核心贡献者12人，已被3家上市公司用于生产。v2.0重点改进异步I/O模型，预计2026Q4发布。",
+      "latency_s": 10.07,
+      "usage": {
+        "input": 454,
+        "output": 77,
+        "cacheRead": 45810,
+        "cacheWrite": 0,
+        "total": 46341
+      },
+      "reply_length": 141
+    },
+    "T3_creative": {
+      "score": 1,
+      "max": 5,
+      "note": "字数 269 (不合规 150-200); 钩子=True; 禁词=['我是']",
+      "reply_preview": "你有没有过这种时刻——凌晨两点，盯着屏幕上第 37 个 bug，心想：\"我是不是不适合干这行？\"\n\n其实你不是一个人。\n\n每个程序员都经历过这种自我怀疑。但有意思的是，那些真正撑过来的人，往往不是技术最强的，而是最早想通一件事的：写代码，本质上是在学怎么和\"复杂\"相处。\n\n这个节目不讲怎么刷题，不讲怎么进大厂。我们聊的是——一个年轻程序员，怎么在技术的浪潮里，找到自己的节奏，怎么在不断被淘汰的焦虑",
+      "latency_s": 16.59,
+      "usage": {
+        "input": 332,
+        "output": 147,
+        "cacheRead": 46066,
+        "cacheWrite": 0,
+        "total": 46545
+      },
+      "reply_length": 284
+    },
+    "T4_logic": {
+      "score": 0,
+      "max": 5,
+      "note": "未找到合法解 (候选: ['999', '123', '456', '789', '987', '654'])",
+      "reply_preview": "# 解题思路\n\n1+2+3+...+9 = 45，三个三位数共9位数字，每个用一次，所以每位数字和 = 45。\n\n如果 a + b + c = 999，那么每位（百/十/个）的数字和应为 9（因为 999/3 位）。即每列三个数字之和 = 9。\n\n**构造方法：** 把 1-9 分成三组，每组三个数字和为 9：\n- 1+2+6=9，1+3+5=9，1+4+4 ❌，2+3+4=9，1+8+0 ❌，3",
+      "latency_s": 46.88,
+      "usage": {
+        "input": 5180,
+        "output": 1270,
+        "cacheRead": 45682,
+        "cacheWrite": 0,
+        "total": 52132
+      },
+      "reply_length": 1779
+    }
+  },
+  "minimax/MiniMax-M2.7": {
+    "T1_code": {
+      "score": 10,
+      "max": 10,
+      "note": "5/5 用例通过",
+      "details": [
+        [
+          "2",
+          "True",
+          "True",
+          "True"
+        ],
+        [
+          "17",
+          "True",
+          "True",
+          "True"
+        ],
+        [
+          "1",
+          "False",
+          "False",
+          "True"
+        ],
+        [
+          "-7",
+          "False",
+          "False",
+          "True"
+        ],
+        [
+          "100",
+          "False",
+          "False",
+          "True"
+        ]
+      ],
+      "reply_preview": "```python\ndef is_prime(n: int) -> bool:\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    i = 3\n    while i * i <= n:\n        if n % i =",
+      "latency_s": 9.66,
+      "usage": {
+        "input": 137,
+        "output": 174,
+        "cacheRead": 49280,
+        "cacheWrite": 0,
+        "total": 49591
+      },
+      "reply_length": 405
+    },
+    "T2_summary": {
+      "score": 9,
+      "max": 10,
+      "note": "9/10 关键事实；字数 131 (合规)",
+      "hits": [
+        "小李",
+        "深圳",
+        "StarFeather",
+        "1万",
+        "30天",
+        "100KB",
+        "22%",
+        "3家上市公司",
+        "v2.0"
+      ],
+      "misses": [
+        "2026年第四季度"
+      ],
+      "length_ok": true,
+      "reply_preview": "2026年5月，深圳工程师小李发布轻量Web框架StarFeather，30天GitHub Star破1万。主打<100KB零依赖，RPS比Express.js快22%。核心贡献者12人，已被3家上市公司用于生产。v2.0重点改进异步I/O，预计2026Q4发布。",
+      "latency_s": 8.68,
+      "usage": {
+        "input": 432,
+        "output": 100,
+        "cacheRead": 49280,
+        "cacheWrite": 0,
+        "total": 49812
+      },
+      "reply_length": 132
+    },
+    "T3_creative": {
+      "score": 5,
+      "max": 5,
+      "note": "字数 178 (合规); 钩子=True; 禁词=[]",
+      "reply_preview": "你有没有过这种时刻——凌晨两点，盯着第37个bug，心想：\"我真的适合干这行吗？\"\n\n你不是一个人。每个程序员都经历过。\n\n这个节目不教刷题，不教进大厂。我们聊的是——年轻程序员怎么在一天一个新框架的狂潮里不被甩下去，怎么在\"AI要替代我\"的焦虑里，找到自己真正的护城河。\n\n每周30分钟，不讲废话，只聊那些没人教、但必须想透的事。\n\n准备好了吗？重新理解你正在干的这行。",
+      "latency_s": 10.2,
+      "usage": {
+        "input": 303,
+        "output": 173,
+        "cacheRead": 49536,
+        "cacheWrite": 0,
+        "total": 50012
+      },
+      "reply_length": 186
+    },
+    "T4_logic": {
+      "score": 0,
+      "max": 5,
+      "note": "未找到合法解 (候选: ['123', '456', '789'])",
+      "reply_preview": "**结论：这道题无解。**\n\n用1-9各一次组成三个三位数，最小和为 123+456+789=1368，远大于999。\n\n**证明：**\n- 三个三位数每位（百/十/个）各有3个数字\n- 每列数字和范围：最小1+2+3=6，最大7+8+9=24\n- 9+9+9=27（999的各位数字和），但实际每列和需达到该值+进位\n- 经过进位分析，即使每列和取最大（24），也凑不出999\n\n**最小和验证：*",
+      "latency_s": 22.54,
+      "usage": {
+        "input": 1715,
+        "output": 1311,
+        "cacheRead": 49920,
+        "cacheWrite": 0,
+        "total": 52946
+      },
+      "reply_length": 233
+    }
+  },
+  "deepseek/deepseek-v4-flash": {
+    "T1_code": {
+      "score": 10,
+      "max": 10,
+      "note": "5/5 用例通过",
+      "details": [
+        [
+          "2",
+          "True",
+          "True",
+          "True"
+        ],
+        [
+          "17",
+          "True",
+          "True",
+          "True"
+        ],
+        [
+          "1",
+          "False",
+          "False",
+          "True"
+        ],
+        [
+          "-7",
+          "False",
+          "False",
+          "True"
+        ],
+        [
+          "100",
+          "False",
+          "False",
+          "True"
+        ]
+      ],
+      "reply_preview": "```python\ndef is_prime(n: int) -> bool:\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    i = 3\n    while i * i <= n:\n        if n % i =",
+      "latency_s": 11.94,
+      "usage": {
+        "input": 48820,
+        "output": 547,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "total": 49367
+      },
+      "reply_length": 1077
+    },
+    "T2_summary": {
+      "score": 9,
+      "max": 10,
+      "note": "9/10 关键事实；字数 131 (合规)",
+      "hits": [
+        "小李",
+        "深圳",
+        "StarFeather",
+        "1万",
+        "30天",
+        "100KB",
+        "22%",
+        "3家上市公司",
+        "v2.0"
+      ],
+      "misses": [
+        "2026年第四季度"
+      ],
+      "length_ok": true,
+      "reply_preview": "2026年5月，深圳工程师小李发布轻量Web框架StarFeather，30天GitHub Star破1万。主打<100KB零依赖，RPS比Express.js快22%。核心贡献者12人，已被3家上市公司用于生产。v2.0重点改进异步I/O，预计2026Q4发布。",
+      "latency_s": 7.21,
+      "usage": {
+        "input": 6641,
+        "output": 72,
+        "cacheRead": 42880,
+        "cacheWrite": 0,
+        "total": 49593
+      },
+      "reply_length": 132
+    },
+    "T3_creative": {
+      "score": 5,
+      "max": 5,
+      "note": "字数 180 (合规); 钩子=True; 禁词=[]",
+      "reply_preview": "你有没有过这种时刻——凌晨两点，盯着第37个bug，心想：\"我真的适合干这行吗？\"\n\n这不是你的问题。每个程序员都经历过。\n\n这个节目不教刷题、不教进大厂。我们聊的是——一个年轻程序员，怎么在一天一个新框架的狂潮里，不被甩下去；怎么在被AI替代的焦虑中，找到真正属于人的位置。\n\n每周30分钟，不讲废话，只聊那些没人教、但必须想透的事。\n\n准备好了吗？重新理解你正在干的这行。",
+      "latency_s": 7.84,
+      "usage": {
+        "input": 1007,
+        "output": 112,
+        "cacheRead": 48640,
+        "cacheWrite": 0,
+        "total": 49759
+      },
+      "reply_length": 188
+    },
+    "T4_logic": {
+      "score": 5,
+      "max": 5,
+      "note": "找到 152+368+479=999，9 数字不重复",
+      "found": [
+        152,
+        368,
+        479
+      ],
+      "reply_preview": "之前被\"三个三位数各用不同数字\"这个前提限制住了——实际上每个数字只出现一次就好，三个三位数内部可以有数字在同一列出现。\n\n**之前结论错误。重新做：**\n\n用1-9每个一次，组成三个三位数 a,b,c，和为999。\n\n设 a=100a₁+10a₂+a₃, b=100b₁+10b₂+b₃, c=100c₁+10c₂+c₃\n\na+b+c=999 → 每列（个/十/百）三个数字之和 = 9 或 19 ",
+      "latency_s": 15.07,
+      "usage": {
+        "input": 40207,
+        "output": 890,
+        "cacheRead": 13696,
+        "cacheWrite": 0,
+        "total": 54793
+      },
+      "reply_length": 1253
+    }
+  },
+  "deepseek/deepseek-v4-pro": {
+    "T1_code": {
+      "score": 10,
+      "max": 10,
+      "note": "5/5 用例通过",
+      "details": [
+        [
+          "2",
+          "True",
+          "True",
+          "True"
+        ],
+        [
+          "17",
+          "True",
+          "True",
+          "True"
+        ],
+        [
+          "1",
+          "False",
+          "False",
+          "True"
+        ],
+        [
+          "-7",
+          "False",
+          "False",
+          "True"
+        ],
+        [
+          "100",
+          "False",
+          "False",
+          "True"
+        ]
+      ],
+      "reply_preview": "```python\ndef is_prime(n: int) -> bool:\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    i = 3\n    while i * i <= n:\n        if n % i =",
+      "latency_s": 12.67,
+      "usage": {
+        "input": 50165,
+        "output": 192,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "total": 50357
+      },
+      "reply_length": 484
+    },
+    "T2_summary": {
+      "score": 9,
+      "max": 10,
+      "note": "9/10 关键事实；字数 131 (合规)",
+      "hits": [
+        "小李",
+        "深圳",
+        "StarFeather",
+        "1万",
+        "30天",
+        "100KB",
+        "22%",
+        "3家上市公司",
+        "v2.0"
+      ],
+      "misses": [
+        "2026年第四季度"
+      ],
+      "length_ok": true,
+      "reply_preview": "2026年5月，深圳工程师小李发布轻量Web框架StarFeather，30天GitHub Star破1万。主打<100KB零依赖，RPS比Express.js快22%。核心贡献者12人，已被3家上市公司用于生产。v2.0重点改进异步I/O，预计2026Q4发布。",
+      "latency_s": 7.56,
+      "usage": {
+        "input": 463,
+        "output": 72,
+        "cacheRead": 50048,
+        "cacheWrite": 0,
+        "total": 50583
+      },
+      "reply_length": 132
+    },
+    "T3_creative": {
+      "score": 2,
+      "max": 5,
+      "note": "字数 239 (不合规 150-200); 钩子=True; 禁词=[]",
+      "reply_preview": "你有没有过这种时刻——凌晨两点，盯着第37个bug，心想：\"我真的适合干这行吗？\"\n\n你不是一个人。\n\n每个程序员都经历过这种深夜拷问。但有意思的是，那些真正走出来的，往往不是技术最强的，而是最早想通一件事的：写代码，本质是在学和\"不确定\"共处。\n\n这个节目不教刷题，不教进大厂。我们聊的是——年轻程序员怎么在一天一个新框架的狂潮里不被甩下去，怎么在\"AI要替代我\"的焦虑里，找到自己真正的护城河。\n",
+      "latency_s": 10.51,
+      "usage": {
+        "input": 589,
+        "output": 150,
+        "cacheRead": 50048,
+        "cacheWrite": 0,
+        "total": 50787
+      },
+      "reply_length": 249
+    },
+    "T4_logic": {
+      "score": 5,
+      "max": 5,
+      "note": "找到 152+368+479=999，9 数字不重复",
+      "found": [
+        152,
+        368,
+        479
+      ],
+      "reply_preview": "之前推导有误。让我用进位方程重新严格推导。\n\n设 a₁a₂a₃ + b₁b₂b₃ + c₁c₂c₃ = 999（a₁,b₁,c₁为百位...）\n\n个位进位 x（0/1/2），十位进位 y（0/1/2）：\n\n- 个位：a₃+b₃+c₃ = 9+10x\n- 十位：a₂+b₂+c₂+x = 9+10y\n- 百位：a₁+b₁+c₁+y = 9\n\n全部数字和：45\n\n求和：(a₁+b₁+c₁) + (a₂+",
+      "latency_s": 21.32,
+      "usage": {
+        "input": 43460,
+        "output": 714,
+        "cacheRead": 11392,
+        "cacheWrite": 0,
+        "total": 55566
+      },
+      "reply_length": 1013
+    }
+  }
+}

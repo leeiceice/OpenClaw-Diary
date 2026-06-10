@@ -1,0 +1,10 @@
+{
+  "xiaoma-hermes": {
+    "url": "https://github.com/leeiceice/xiaoma-hermes",
+    "clone_url": "https://github.com/leeiceice/xiaoma-hermes.git",
+    "description": "小马 Hermes 配置备份",
+    "default_branch": "master",
+    "access": "READ ONLY - do not pull/push/add",
+    "last_checked": "2026-05-14"
+  }
+}

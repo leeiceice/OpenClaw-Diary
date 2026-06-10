@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" font-family="Microsoft YaHei, SimHei, Arial, sans-serif">
+  <rect width="1400" height="1000" fill="#0f1419"/>
+
+  <!-- 标题 -->
+  <text x="700" y="40" text-anchor="middle" fill="#e6e6e6" font-size="26" font-weight="bold">&#x1F50D; 小龙虾系统 · 搜索/检索架构（5 层 + 闭环）</text>
+  <text x="700" y="65" text-anchor="middle" fill="#8b949e" font-size="13">2026-06-08 v2 · 查询 → 3 路并行 → 融合/回退 → 评估 → 反馈给下次查询</text>
+
+  <!-- ============== 顶层：用户查询 ============== -->
+  <g>
+    <rect x="500" y="100" width="400" height="50" rx="25" fill="#58a6ff" opacity="0.9"/>
+    <text x="700" y="132" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="bold">&#x1F4AC; Lee 的查询（飞书 DM / 命令）</text>
+  </g>
+  <line x1="700" y1="150" x2="700" y2="180" stroke="#58a6ff" stroke-width="2" marker-end="url(#arr1)"/>
+
+  <!-- ============== L1：路由分发 ============== -->
+  <g>
+    <rect x="450" y="180" width="500" height="70" rx="8" fill="#1f6feb" opacity="0.85"/>
+    <text x="700" y="208" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">L1 · 路由分发（关键词/语义/外部判断）</text>
+    <text x="700" y="232" text-anchor="middle" fill="#c9d1d9" font-size="11">先问：本地有没有？ → 选 A/B/C 路</text>
+  </g>
+  <line x1="700" y1="250" x2="700" y2="280" stroke="#30363d" stroke-width="2"/>
+
+  <!-- ============== L2：三路并行 ============== -->
+
+  <!-- A 路 -->
+  <g>
+    <rect x="50" y="280" width="400" height="40" rx="6" fill="#3fb950" opacity="0.85"/>
+    <text x="250" y="305" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="bold">A 路 · 本地记忆（memory_search）</text>
+    <line x1="250" y1="320" x2="250" y2="350" stroke="#3fb950" stroke-width="2"/>
+  </g>
+
+  <!-- B 路 -->
+  <g>
+    <rect x="500" y="280" width="400" height="40" rx="6" fill="#d29922" opacity="0.95"/>
+    <text x="700" y="305" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="bold">B 路 · 联网搜索（tavily / web_search）</text>
+    <line x1="700" y1="320" x2="700" y2="350" stroke="#d29922" stroke-width="2"/>
+  </g>
+
+  <!-- C 路 -->
+  <g>
+    <rect x="950" y="280" width="400" height="40" rx="6" fill="#a371f7" opacity="0.85"/>
+    <text x="1150" y="305" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="bold">C 路 · 外部资源（飞书/Obsidian 直查）</text>
+    <line x1="1150" y1="320" x2="1150" y2="350" stroke="#a371f7" stroke-width="2"/>
+  </g>
+
+  <!-- ============== A 路：双引擎 + RRF 融合 ============== -->
+  <g>
+    <text x="250" y="375" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="bold">A-1 · BM25 关键词</text>
+    <text x="250" y="393" text-anchor="middle" fill="#c9d1d9" font-size="10">精确匹配 · 短查询</text>
+    <text x="250" y="408" text-anchor="middle" fill="#8b949e" font-size="9">scripts/memory_search.py</text>
+
+    <text x="450" y="375" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="bold">A-2 · 向量语义</text>
+    <text x="450" y="393" text-anchor="middle" fill="#c9d1d9" font-size="10">语义匹配 · 长查询</text>
+    <text x="450" y="408" text-anchor="middle" fill="#8b949e" font-size="9">Qwen3-Embedding-4B</text>
+  </g>
+
+  <!-- A 路 RRF -->
+  <g>
+    <rect x="150" y="430" width="350" height="55" rx="8" fill="#3fb950" opacity="0.9"/>
+    <text x="325" y="455" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">&#x1F500; RRF 融合（BM25 × Vector）</text>
+    <text x="325" y="473" text-anchor="middle" fill="#c9d1d9" font-size="10">Reciprocal Rank Fusion · rank-based 倒数融合</text>
+  </g>
+
+  <!-- A 路数据源 -->
+  <g>
+    <rect x="50" y="510" width="500" height="90" rx="6" fill="#0d1117" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="300" y="535" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="bold">&#x1F4C1; A 路数据源</text>
+    <text x="300" y="557" text-anchor="middle" fill="#c9d1d9" font-size="11">MEMORY.md v3.8（长期索引）</text>
+    <text x="300" y="575" text-anchor="middle" fill="#c9d1d9" font-size="11">memory/YYYY-MM-DD.md（78 篇中期）</text>
+    <text x="300" y="592" text-anchor="middle" fill="#8b949e" font-size="10">+ sessions / wiki corpus（可选）</text>
+  </g>
+
+  <!-- A 路回退判断 -->
+  <g>
+    <rect x="50" y="620" width="500" height="60" rx="6" fill="#0d1117" stroke="#da3633" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="300" y="643" text-anchor="middle" fill="#da3633" font-size="12" font-weight="bold">&#x26A0; A 路判定：Top-1 score ≥ 阈值?</text>
+    <text x="300" y="660" text-anchor="middle" fill="#c9d1d9" font-size="10">是 → 返回 | 否 → 回退到 B 路（联网补全）</text>
+    <text x="300" y="675" text-anchor="middle" fill="#8b949e" font-size="9">阈值由 HEARTBEAT 健康度动态调整</text>
+  </g>
+
+  <!-- A 路输出 -->
+  <g>
+    <rect x="50" y="700" width="500" height="40" rx="6" fill="#3fb950" opacity="0.6"/>
+    <text x="300" y="725" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">&#x2192; A 路返回：Top-N 引用片段（带置信度）</text>
+  </g>
+
+  <!-- ============== B 路：4 级回退 ============== -->
+  <g>
+    <text x="700" y="375" text-anchor="middle" fill="#d29922" font-size="13" font-weight="bold">B 路 · 联网搜索</text>
+
+    <!-- B-1 -->
+    <g>
+      <rect x="500" y="385" width="400" height="35" rx="6" fill="#d29922" opacity="0.3" stroke="#d29922" stroke-width="1"/>
+      <text x="700" y="408" text-anchor="middle" fill="#e6e6e6" font-size="11" font-weight="bold">B-1 · tavily（结构化搜索/提取）</text>
+    </g>
+    <!-- B-2 -->
+    <g>
+      <rect x="500" y="425" width="400" height="35" rx="6" fill="#d29922" opacity="0.5" stroke="#d29922" stroke-width="1"/>
+      <text x="700" y="448" text-anchor="middle" fill="#e6e6e6" font-size="11" font-weight="bold">B-2 · web_search（Brave 后端）</text>
+    </g>
+    <!-- B-3 -->
+    <g>
+      <rect x="500" y="465" width="400" height="35" rx="6" fill="#d29922" opacity="0.7" stroke="#d29922" stroke-width="1"/>
+      <text x="700" y="488" text-anchor="middle" fill="#e6e6e6" font-size="11" font-weight="bold">B-3 · opencli（70+ 站点 CLI）</text>
+    </g>
+    <!-- B-4 -->
+    <g>
+      <rect x="500" y="505" width="400" height="35" rx="6" fill="#d29922" opacity="0.9" stroke="#d29922" stroke-width="1"/>
+      <text x="700" y="528" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">B-4 · browser（浏览器兜底，最后手段）</text>
+    </g>
+  </g>
+
+  <!-- B 路回退逻辑 -->
+  <g>
+    <rect x="500" y="555" width="400" height="80" rx="6" fill="#0d1117" stroke="#d29922" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="700" y="578" text-anchor="middle" fill="#d29922" font-size="12" font-weight="bold">&#x1F504; B 路回退链（自动降级）</text>
+    <text x="700" y="598" text-anchor="middle" fill="#c9d1d9" font-size="10">tavily 失败/超时 → web_search</text>
+    <text x="700" y="615" text-anchor="middle" fill="#c9d1d9" font-size="10">web_search 仍不够 → opencli</text>
+    <text x="700" y="630" text-anchor="middle" fill="#c9d1d9" font-size="10">opencli 也不支持 → browser 兜底</text>
+  </g>
+
+  <!-- B 路输出 -->
+  <g>
+    <rect x="500" y="700" width="400" height="40" rx="6" fill="#d29922" opacity="0.6"/>
+    <text x="700" y="725" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">&#x2192; B 路返回：网页摘要/提取内容/AI answer</text>
+  </g>
+
+  <!-- ============== C 路：直查 ============== -->
+  <g>
+    <text x="1150" y="375" text-anchor="middle" fill="#a371f7" font-size="13" font-weight="bold">C 路 · 外部资源直查</text>
+
+    <!-- C-1 -->
+    <g>
+      <rect x="950" y="385" width="400" height="50" rx="6" fill="#a371f7" opacity="0.3" stroke="#a371f7" stroke-width="1"/>
+      <text x="1150" y="406" text-anchor="middle" fill="#e6e6e6" font-size="12" font-weight="bold">C-1 · 飞书</text>
+      <text x="1150" y="423" text-anchor="middle" fill="#c9d1d9" font-size="10">群/单聊/文档/任务/日历</text>
+    </g>
+    <!-- C-2 -->
+    <g>
+      <rect x="950" y="445" width="400" height="50" rx="6" fill="#a371f7" opacity="0.5" stroke="#a371f7" stroke-width="1"/>
+      <text x="1150" y="466" text-anchor="middle" fill="#e6e6e6" font-size="12" font-weight="bold">C-2 · Obsidian</text>
+      <text x="1150" y="483" text-anchor="middle" fill="#c9d1d9" font-size="10">Wiki 5 子目录 / PARA / 日记 / 收藏</text>
+    </g>
+  </g>
+
+  <!-- C 路数据源 -->
+  <g>
+    <rect x="950" y="510" width="400" height="90" rx="6" fill="#0d1117" stroke="#a371f7" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="1150" y="535" text-anchor="middle" fill="#a371f7" font-size="13" font-weight="bold">&#x1F4C1; C 路数据源</text>
+    <text x="1150" y="557" text-anchor="middle" fill="#c9d1d9" font-size="11">6 个飞书群 · 任务清单 · 日历</text>
+    <text x="1150" y="575" text-anchor="middle" fill="#c9d1d9" font-size="11">~/Obsidian/{wiki, 收藏, 日记}</text>
+    <text x="1150" y="592" text-anchor="middle" fill="#8b949e" font-size="10">用于"群里说了什么/日历有什么"</text>
+  </g>
+
+  <!-- C 路特性 -->
+  <g>
+    <rect x="950" y="620" width="400" height="60" rx="6" fill="#0d1117" stroke="#a371f7" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="1150" y="643" text-anchor="middle" fill="#a371f7" font-size="12" font-weight="bold">&#x26A1; C 路特性：直查 API</text>
+    <text x="1150" y="660" text-anchor="middle" fill="#c9d1d9" font-size="10">不走检索引擎，直接调专用 API</text>
+    <text x="1150" y="675" text-anchor="middle" fill="#8b949e" font-size="9">最准，但受 API 权限/限流影响</text>
+  </g>
+
+  <!-- C 路输出 -->
+  <g>
+    <rect x="950" y="700" width="400" height="40" rx="6" fill="#a371f7" opacity="0.6"/>
+    <text x="1150" y="725" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">&#x2192; C 路返回：结构化结果（消息/任务/文档）</text>
+  </g>
+
+  <!-- ============== L4：融合/汇总 ============== -->
+  <g>
+    <rect x="400" y="770" width="600" height="50" rx="8" fill="#58a6ff" opacity="0.9"/>
+    <text x="700" y="798" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">L4 · 汇总：3 路结果合并 + 引用对齐</text>
+  </g>
+  <line x1="300" y1="740" x2="500" y2="770" stroke="#3fb950" stroke-width="2" marker-end="url(#arr1)"/>
+  <line x1="700" y1="740" x2="700" y2="770" stroke="#d29922" stroke-width="2" marker-end="url(#arr1)"/>
+  <line x1="1100" y1="740" x2="900" y2="770" stroke="#a371f7" stroke-width="2" marker-end="url(#arr1)"/>
+
+  <!-- ============== L5：评估反馈（闭环） ============== -->
+  <g>
+    <rect x="100" y="850" width="1200" height="120" rx="10" fill="#0d1117" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="700" y="880" text-anchor="middle" fill="#8b949e" font-size="14" font-weight="bold">L5 · 评估反馈层（HEARTBEAT 4 步 · 闭环关键）</text>
+
+    <text x="130" y="908" fill="#3fb950" font-size="11" font-weight="bold">&#x1F4CA; A 路评估</text>
+    <text x="130" y="925" fill="#c9d1d9" font-size="10">RRF score 异常检测</text>
+    <text x="130" y="940" fill="#c9d1d9" font-size="10">纯 BM25 降级告警</text>
+    <text x="130" y="955" fill="#8b949e" font-size="9">→ 推安全群</text>
+
+    <text x="450" y="908" fill="#d29922" font-size="11" font-weight="bold">&#x1F4CA; B 路评估</text>
+    <text x="450" y="925" fill="#c9d1d9" font-size="10">回退链触发次数</text>
+    <text x="450" y="940" fill="#c9d1d9" font-size="10">成功率/超时率</text>
+    <text x="450" y="955" fill="#8b949e" font-size="9">→ 优化阈值</text>
+
+    <text x="770" y="908" fill="#a371f7" font-size="11" font-weight="bold">&#x1F4CA; C 路评估</text>
+    <text x="770" y="925" fill="#c9d1d9" font-size="10">API 调用成功率</text>
+    <text x="770" y="940" fill="#c9d1d9" font-size="10">限流/权限错误</text>
+    <text x="770" y="955" fill="#8b949e" font-size="9">→ 推安全群</text>
+
+    <text x="1050" y="908" fill="#58a6ff" font-size="11" font-weight="bold">&#x1F504; 闭环</text>
+    <text x="1050" y="925" fill="#c9d1d9" font-size="10">评估结果→L1 路由阈值</text>
+    <text x="1050" y="940" fill="#c9d1d9" font-size="10">下次查询更准更快</text>
+    <text x="1050" y="955" fill="#8b949e" font-size="9">scripts/check_memory_search_health.py</text>
+  </g>
+
+  <!-- 闭环箭头：L5 回到 L1 -->
+  <path d="M 700 850 Q 700 80 700 80" stroke="#58a6ff" stroke-width="2" fill="none" stroke-dasharray="6,4" opacity="0.4"/>
+  <text x="50" y="510" text-anchor="start" fill="#58a6ff" font-size="11" font-weight="bold">&#x1F504; 闭环：评估→优化路由→下次查询</text>
+
+  <defs>
+    <marker id="arr1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#58a6ff"/>
+    </marker>
+  </defs>
+</svg>

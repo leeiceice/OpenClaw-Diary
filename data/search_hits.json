@@ -1,0 +1,367 @@
+{
+  "7b74f553e5d6": {
+    "hit_count": 2,
+    "last_hit": "2026-05-21T14:15:56.881061",
+    "confidence": 0.54
+  },
+  "bc83aa5b1ae5": {
+    "hit_count": 2,
+    "last_hit": "2026-05-21T14:15:56.881311",
+    "confidence": 0.54
+  },
+  "2813e7474693": {
+    "hit_count": 2,
+    "last_hit": "2026-05-21T14:15:56.881888",
+    "confidence": 0.54
+  },
+  "9005beaac387": {
+    "hit_count": 2,
+    "last_hit": "2026-05-21T14:15:56.882373",
+    "confidence": 0.54
+  },
+  "bb5ae465eafe": {
+    "hit_count": 2,
+    "last_hit": "2026-05-21T14:15:56.882779",
+    "confidence": 0.54
+  },
+  "5b6316bdcd73": {
+    "hit_count": 6,
+    "last_hit": "2026-05-21T16:37:32.323299",
+    "confidence": 0.6200000000000001
+  },
+  "2d0ae48d9cb4": {
+    "hit_count": 3,
+    "last_hit": "2026-05-21T16:32:33.265811",
+    "confidence": 0.56
+  },
+  "edc15b877096": {
+    "hit_count": 4,
+    "last_hit": "2026-05-21T16:37:32.323631",
+    "confidence": 0.5800000000000001
+  },
+  "662f3095e24a": {
+    "hit_count": 3,
+    "last_hit": "2026-05-21T16:32:33.266937",
+    "confidence": 0.56
+  },
+  "ed5c03fa524a": {
+    "hit_count": 2,
+    "last_hit": "2026-05-21T14:34:24.108784",
+    "confidence": 0.54
+  },
+  "9f4eb925dce2": {
+    "hit_count": 3,
+    "last_hit": "2026-05-26T12:55:48.110494+08:00",
+    "confidence": 0.56
+  },
+  "72cbd6087220": {
+    "hit_count": 2,
+    "last_hit": "2026-05-21T16:33:35.471586",
+    "confidence": 0.54
+  },
+  "14526efa7a43": {
+    "hit_count": 7,
+    "last_hit": "2026-05-26T12:55:54.345249+08:00",
+    "confidence": 0.6400000000000001
+  },
+  "f322d3cdf49f": {
+    "hit_count": 3,
+    "last_hit": "2026-05-26T12:55:32.374247+08:00",
+    "confidence": 0.56
+  },
+  "f7c0f2e0e921": {
+    "hit_count": 5,
+    "last_hit": "2026-05-26T12:55:54.345750+08:00",
+    "confidence": 0.6000000000000001
+  },
+  "22b6720da3ae": {
+    "hit_count": 2,
+    "last_hit": "2026-05-26T11:57:26.083685+08:00",
+    "confidence": 0.54
+  },
+  "911850db76f2": {
+    "hit_count": 2,
+    "last_hit": "2026-05-26T11:57:26.084140+08:00",
+    "confidence": 0.54
+  },
+  "3402ffb23234": {
+    "hit_count": 2,
+    "last_hit": "2026-05-26T11:57:26.084810+08:00",
+    "confidence": 0.54
+  },
+  "24ccf403b496": {
+    "hit_count": 1,
+    "last_hit": "2026-05-26T12:55:32.375747+08:00",
+    "confidence": 0.52
+  },
+  "5940a1813ccc": {
+    "hit_count": 1,
+    "last_hit": "2026-05-26T12:55:32.376360+08:00",
+    "confidence": 0.52
+  },
+  "365e1dc9cf2d": {
+    "hit_count": 1,
+    "last_hit": "2026-05-26T12:55:48.110848+08:00",
+    "confidence": 0.52
+  },
+  "067c4ca80ad4": {
+    "hit_count": 1,
+    "last_hit": "2026-05-26T12:55:48.111433+08:00",
+    "confidence": 0.52
+  },
+  "e53460c93e5e": {
+    "hit_count": 1,
+    "last_hit": "2026-05-26T12:55:48.111904+08:00",
+    "confidence": 0.52
+  },
+  "71d3e808e011": {
+    "hit_count": 3,
+    "last_hit": "2026-06-05T16:22:17.708634+08:00",
+    "confidence": 0.56
+  },
+  "ad64990a4d06": {
+    "hit_count": 2,
+    "last_hit": "2026-06-02T20:53:48.343812+08:00",
+    "confidence": 0.54
+  },
+  "dd57e42ce250": {
+    "hit_count": 1,
+    "last_hit": "2026-06-02T20:53:49.092840+08:00",
+    "confidence": 0.52
+  },
+  "b2f29088d8d0": {
+    "hit_count": 1,
+    "last_hit": "2026-06-02T20:53:49.093795+08:00",
+    "confidence": 0.52
+  },
+  "45931c45a3f6": {
+    "hit_count": 1,
+    "last_hit": "2026-06-02T20:53:49.094392+08:00",
+    "confidence": 0.52
+  },
+  "c192a352f054": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T15:54:09.462309+08:00",
+    "confidence": 0.52
+  },
+  "cbbd7ff67b32": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T15:54:09.462728+08:00",
+    "confidence": 0.52
+  },
+  "636fc9cd698e": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T15:54:12.215399+08:00",
+    "confidence": 0.52
+  },
+  "841143bf55fd": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T15:54:12.215819+08:00",
+    "confidence": 0.52
+  },
+  "2cd01511a151": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T15:54:14.003524+08:00",
+    "confidence": 0.52
+  },
+  "2d36130baac6": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T15:54:14.003971+08:00",
+    "confidence": 0.52
+  },
+  "3a34488faf9e": {
+    "hit_count": 3,
+    "last_hit": "2026-06-05T15:59:49.846861+08:00",
+    "confidence": 0.56
+  },
+  "a5313368890e": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T15:54:32.054229+08:00",
+    "confidence": 0.52
+  },
+  "1c2900e88bbc": {
+    "hit_count": 126,
+    "last_hit": "2026-06-10T01:06:53.397698+08:00",
+    "confidence": 1.0
+  },
+  "e93f1a7629d0": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T15:59:26.092765+08:00",
+    "confidence": 0.52
+  },
+  "d9969e3cd720": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T15:59:26.093360+08:00",
+    "confidence": 0.52
+  },
+  "86cb286ead8d": {
+    "hit_count": 134,
+    "last_hit": "2026-06-10T01:06:49.967311+08:00",
+    "confidence": 1.0
+  },
+  "1557e7f09acc": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T16:00:23.042538+08:00",
+    "confidence": 0.52
+  },
+  "99b6a4b86dc5": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T16:00:23.043098+08:00",
+    "confidence": 0.52
+  },
+  "ca597a3160b8": {
+    "hit_count": 2,
+    "last_hit": "2026-06-07T17:30:14.319665+08:00",
+    "confidence": 0.54
+  },
+  "d2133c00aceb": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T16:21:35.060963+08:00",
+    "confidence": 0.52
+  },
+  "76ce14ffd50b": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T16:21:35.061500+08:00",
+    "confidence": 0.52
+  },
+  "42abfbf3e8ed": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T16:21:35.063077+08:00",
+    "confidence": 0.52
+  },
+  "c0afcb3eac39": {
+    "hit_count": 59,
+    "last_hit": "2026-06-07T16:45:34.686592+08:00",
+    "confidence": 1.0
+  },
+  "d85bbcd5094b": {
+    "hit_count": 54,
+    "last_hit": "2026-06-07T16:38:00.943777+08:00",
+    "confidence": 1.0
+  },
+  "b738c9042a2d": {
+    "hit_count": 58,
+    "last_hit": "2026-06-07T17:30:23.345749+08:00",
+    "confidence": 1.0
+  },
+  "1c3108573f7e": {
+    "hit_count": 5,
+    "last_hit": "2026-06-07T16:47:25.195129+08:00",
+    "confidence": 0.6000000000000001
+  },
+  "2cb0aa427532": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T16:22:00.972063+08:00",
+    "confidence": 0.52
+  },
+  "f428e7e7ee4e": {
+    "hit_count": 1,
+    "last_hit": "2026-06-05T16:22:17.709158+08:00",
+    "confidence": 0.52
+  },
+  "845b77cecbb2": {
+    "hit_count": 123,
+    "last_hit": "2026-06-10T01:06:53.397107+08:00",
+    "confidence": 1.0
+  },
+  "acf5c69e0d0b": {
+    "hit_count": 2,
+    "last_hit": "2026-06-05T18:22:59.269706+08:00",
+    "confidence": 0.54
+  },
+  "29367525a17a": {
+    "hit_count": 2,
+    "last_hit": "2026-06-05T18:22:59.270281+08:00",
+    "confidence": 0.54
+  },
+  "2a75d2df1ddb": {
+    "hit_count": 2,
+    "last_hit": "2026-06-05T18:22:59.271753+08:00",
+    "confidence": 0.54
+  },
+  "bdedcb434e18": {
+    "hit_count": 2,
+    "last_hit": "2026-06-07T16:47:23.436312+08:00",
+    "confidence": 0.54
+  },
+  "f617db894e46": {
+    "hit_count": 3,
+    "last_hit": "2026-06-07T17:30:23.346434+08:00",
+    "confidence": 0.56
+  },
+  "274b7bf7870c": {
+    "hit_count": 2,
+    "last_hit": "2026-06-07T16:46:43.673270+08:00",
+    "confidence": 0.54
+  },
+  "785a3bab7fe9": {
+    "hit_count": 1,
+    "last_hit": "2026-06-07T16:46:37.574447+08:00",
+    "confidence": 0.52
+  },
+  "c6cf55fc0458": {
+    "hit_count": 1,
+    "last_hit": "2026-06-07T16:46:42.067025+08:00",
+    "confidence": 0.52
+  },
+  "b814721de081": {
+    "hit_count": 1,
+    "last_hit": "2026-06-07T16:46:43.673786+08:00",
+    "confidence": 0.52
+  },
+  "151c66577691": {
+    "hit_count": 72,
+    "last_hit": "2026-06-10T01:06:51.736588+08:00",
+    "confidence": 1.0
+  },
+  "2c34885dc58e": {
+    "hit_count": 72,
+    "last_hit": "2026-06-10T01:06:51.737282+08:00",
+    "confidence": 1.0
+  },
+  "af877aaf9008": {
+    "hit_count": 2,
+    "last_hit": "2026-06-07T16:47:08.663903+08:00",
+    "confidence": 0.54
+  },
+  "5261579e1562": {
+    "hit_count": 2,
+    "last_hit": "2026-06-07T16:47:08.664563+08:00",
+    "confidence": 0.54
+  },
+  "6455253cde56": {
+    "hit_count": 1,
+    "last_hit": "2026-06-07T16:47:06.888714+08:00",
+    "confidence": 0.52
+  },
+  "29a592c4e77c": {
+    "hit_count": 71,
+    "last_hit": "2026-06-10T01:06:49.968333+08:00",
+    "confidence": 1.0
+  },
+  "cb8b3957f3e4": {
+    "hit_count": 70,
+    "last_hit": "2026-06-10T01:06:51.735964+08:00",
+    "confidence": 1.0
+  },
+  "50a378bbc33e": {
+    "hit_count": 1,
+    "last_hit": "2026-06-07T17:30:14.318480+08:00",
+    "confidence": 0.52
+  },
+  "6939bf717ce9": {
+    "hit_count": 1,
+    "last_hit": "2026-06-07T17:30:14.319089+08:00",
+    "confidence": 0.52
+  },
+  "f7f5b654c1f0": {
+    "hit_count": 62,
+    "last_hit": "2026-06-10T01:06:53.398693+08:00",
+    "confidence": 1.0
+  },
+  "d2d7d4bec2ca": {
+    "hit_count": 8,
+    "last_hit": "2026-06-10T01:06:49.969054+08:00",
+    "confidence": 0.6600000000000001
+  }
+}

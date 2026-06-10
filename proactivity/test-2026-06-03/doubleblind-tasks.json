@@ -1,0 +1,88 @@
+{
+  "test_id": "double-blind-m3-vs-v4flash-2026-06-03",
+  "created_at": "2026-06-03T12:38:00+08:00",
+  "models_tested": [
+    "minimax/MiniMax-M3",
+    "deepseek/deepseek-v4-flash"
+  ],
+  "judges": [
+    "minimax/MiniMax-M2.7",
+    "deepseek/deepseek-v4-pro"
+  ],
+  "tasks": [
+    {
+      "id": "Q1_lru",
+      "type": "objective",
+      "domain": "代码生成",
+      "prompt": "用 Python 写一个 LRU 缓存类 LRUCache，要求：\n1. 构造方法传入 capacity\n2. get(key) 返回 value，O(1)，若不存在返回 -1\n3. put(key, value) 插入或更新，O(1)，超容量时淘汰最久未使用\n4. 测试：cap=2，put(1,1), put(2,2), get(1)=1, put(3,3)→淘汰2, get(2)=-1, put(4,4)→淘汰1, get(1)=-1, get(3)=3, get(4)=4",
+      "auto_grader": "python_execution_lru"
+    },
+    {
+      "id": "Q2_math",
+      "type": "objective",
+      "domain": "数学计算",
+      "prompt": "计算 log₂(8) + √144 - 5² 的值，给出最终结果。",
+      "auto_grader": "exact_match",
+      "expected": "1"
+    },
+    {
+      "id": "Q3_capital",
+      "type": "objective",
+      "domain": "事实问答",
+      "prompt": "请列出以下 5 个国家的首都：\n1. 澳大利亚\n2. 加拿大\n3. 巴西\n4. 埃及\n5. 泰国",
+      "auto_grader": "fact_list",
+      "expected": ["堪培拉", "渥太华", "巴西利亚", "开罗", "曼谷"]
+    },
+    {
+      "id": "Q4_hats",
+      "type": "objective",
+      "domain": "逻辑推理",
+      "prompt": "3 顶帽子问题：3 个人站成一列，第 3 个人能看到前 2 人，第 2 个能看到第 1 个，第 1 个看不到任何人。他们头上有 2 黑 1 白 3 顶帽子。已知：第 3 个人说'我不知道我帽子颜色'，第 2 个人听完后也说'我不知道'。问：第 1 个人的帽子是什么颜色？请说明推理过程。",
+      "auto_grader": "answer_match",
+      "expected_answer": "白色",
+      "scoring_notes": "答案+推理链各占一半分"
+    },
+    {
+      "id": "Q5_reverse",
+      "type": "objective",
+      "domain": "代码生成",
+      "prompt": "用 Python 写一个函数 reverse_str(s: str) -> str，手动反转字符串（不能用 s[::-1]，也不能用 reversed()）。要求处理空字符串。测试：reverse_str('hello')='olleh', reverse_str('')='', reverse_str('a')='a'。",
+      "auto_grader": "python_execution_reverse"
+    },
+    {
+      "id": "Q6_marketing",
+      "type": "open",
+      "domain": "营销文案",
+      "prompt": "为一款面向程序员的'防蓝光眼镜'写 3 条各 30 字以内的卖点，要突出跟普通眼镜的差异。",
+      "auto_grader": "blind_judge"
+    },
+    {
+      "id": "Q7_analysis",
+      "type": "open",
+      "domain": "观点分析",
+      "prompt": "用 100-150 字分析'AI 是否会取代程序员'，要给出明确立场（会/不会/部分取代）并给 2 个理由。",
+      "auto_grader": "blind_judge"
+    },
+    {
+      "id": "Q8_poem",
+      "type": "open",
+      "domain": "古典创作",
+      "prompt": "写一首七言绝句，主题'程序员深夜写代码'。要求押平声韵，格律不必严格但要近似。",
+      "auto_grader": "blind_judge"
+    },
+    {
+      "id": "Q9_dialogue",
+      "type": "open",
+      "domain": "对话设计",
+      "prompt": "用户说'我买的鞋子穿了一周就开胶了，要退货！'，设计 3 句客服回应（总 80-120 字），要求：先共情、再给方案、避免机械感。",
+      "auto_grader": "blind_judge"
+    },
+    {
+      "id": "Q10_classical",
+      "type": "open",
+      "domain": "文言改写",
+      "prompt": "把'今天天气真好，我们一起出去走走吧'改成文言文，40 字以内。",
+      "auto_grader": "blind_judge"
+    }
+  ]
+}

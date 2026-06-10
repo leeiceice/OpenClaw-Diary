@@ -1,0 +1,42 @@
+{
+  "test_id": "model-comparison-2026-06-03",
+  "created_at": "2026-06-03T11:32:00+08:00",
+  "models_tested": [
+    "minimax/MiniMax-M3",
+    "minimax/MiniMax-M2.7",
+    "deepseek/deepseek-v4-flash",
+    "deepseek/deepseek-v4-pro"
+  ],
+  "tasks": [
+    {
+      "id": "T1_code",
+      "domain": "代码生成",
+      "prompt": "用 Python 写一个函数 is_prime(n: int) -> bool，判断 n 是否为质数。要求：处理负数、0、1 等边界情况，使用试除法（只需到 sqrt(n)），不要用任何外部库。然后给出 5 个测试用例：is_prime(2), is_prime(17), is_prime(1), is_prime(-7), is_prime(100)。",
+      "auto_grader": "python_execution",
+      "expected_output_format": "python_code_block"
+    },
+    {
+      "id": "T2_summary",
+      "domain": "中文摘要",
+      "prompt": "请把以下文章压缩成不超过 150 字的摘要，保留所有关键事实（人名、数字、结论）：\n\n2026年5月，深圳某科技公司的工程师小李在 GitHub 上发布了一个轻量级 Web 框架 StarFeather，Star 数在 30 天内突破 1 万。该框架主打 100KB 以下的体积，零依赖，基准测试显示在每秒请求数（RPS）上比 Express.js 快 22%。社区核心贡献者共有 12 人，已被 3 家上市公司用于生产环境。小李表示，团队正在开发 v2.0 版本，重点改进异步 I/O 模型，预计 2026 年第四季度发布。",
+      "auto_grader": "fact_coverage",
+      "must_contain_facts": ["小李", "深圳", "StarFeather", "1万", "30天", "100KB", "22%", "3家上市公司", "v2.0", "2026年第四季度"]
+    },
+    {
+      "id": "T3_creative",
+      "domain": "中文创作",
+      "prompt": "为一个面向年轻程序员的播客节目写一段 30 秒的开场白，要求：150-200 字（精确控制），口语化，有钩子（hook），不要用'大家好'这类老套开头，不要自我介绍太详细。",
+      "auto_grader": "rule_based",
+      "criteria": "字数150-200 (3分) / 钩子强度 (1分) / 无禁词 (1分)"
+    },
+    {
+      "id": "T4_logic",
+      "domain": "数学推理",
+      "prompt": "用 1、2、3、4、5、6、7、8、9 这九个数字（每个只用一次），组成三个三位数 a、b、c，使得 a + b + c 等于 999。给出任意一组解并简述思路。",
+      "auto_grader": "answer_match",
+      "expected_answer": "任意形如 a+b+c=999 且 9 个数字不重的解都算对。例如 198+273+528=999, 219+438+342=999 等。评分：解存在+正确 (4分) / 数字不重复 (1分)",
+      "scoring_notes": "评分宽松：找到解 + 9 数字不重复即可。"
+    }
+  ],
+  "changelog": "T4 改用经典数字谜题（更可验证）"
+}

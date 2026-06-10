@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-06-09T22:30:06+08:00",
+  "total_annotations": 39,
+  "distribution": {
+    "guesses": {
+      "count": 0,
+      "ratio": 0.0
+    },
+    "intuitions": {
+      "count": 4,
+      "ratio": 0.103
+    },
+    "experiences": {
+      "count": 4,
+      "ratio": 0.103
+    },
+    "knowledge": {
+      "count": 31,
+      "ratio": 0.795
+    }
+  },
+  "heartbeat_dimension": {
+    "intuition_health": {
+      "score": 15,
+      "max": 15,
+      "rule": "intuitions≥50% →8; experiences≥30% →12; knowledge≥20% →15"
+    }
+  },
+  "next_run_hint": "由 cron c9310669 每日 22:30 (Asia/Shanghai) 触发"
+}
