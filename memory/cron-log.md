@@ -301,3 +301,12 @@
 - **git commit + push**: 13 个文件（+2024/-603），commit `61e5e85`，成功推送到 GitHub
 - **备份清理**: 四类备份目录均无旧文件需清理
 - **状态**: ✅ 全部完成
+
+## 2026-06-11 02:00 — Workspace 每日备份维护
+
+- **git pull --no-rebase**: ❌ unrelated histories（origin/OpenClaw-Diary 与本地 xiaolongxia-openclaw 历史无共同祖先）
+- **策略**: 创建备份分支 `backup-before-rebase-20260611` → reset 到 origin/main → checkout 备份分支全部文件 → commit（454文件，+65103/-56）→ push
+- **git push**: ✅ 成功推送（9f66d5c → 6bd0686）
+- **备份清理**: backups/*.json、openclaw.json.bak*、before-fix.*、clobbered.* — 均无文件，无需清理
+- **状态**: ✅ 全部完成
+- **备注**: remote push URL 已从 xiaolongxia-openclaw 修正为 OpenClaw-Diary（fetch/push URL 不同步的历史遗留问题）
