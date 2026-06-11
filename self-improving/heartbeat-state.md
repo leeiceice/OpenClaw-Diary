@@ -1,12 +1,12 @@
 # heartbeat-state
 
-> 自动维护 — 最后更新：2026-06-09 22:05 CST
+> 自动维护 — 最后更新：2026-06-11 16:07 CST
 
 ## 状态
 
-- **timestamp**: 2026-06-09T22:05:00+08:00
-- **run_count**: 150
-- **score**: 75（stable）
+- **timestamp**: 2026-06-11T16:07:00+08:00
+- **run_count**: 162
+- **score**: 78（stable）
 - **trend**: stable
 - **last_heartbeat**: 2026-06-09T22:05:00+08:00
 
@@ -94,3 +94,115 @@ _由 heartbeat-maintenance cron 自动写入 | 2026-06-09 22:05_
 ---
 
 _由 heartbeat-maintenance cron 自动写入 | 2026-06-09 23:03_
+last_heartbeat: 2026-06-11T02:13:38+08:00
+
+## HB-154 (02:09深夜静默)
+
+- **timestamp**:2026-06-11T02:09:00+08:00
+- **run_count**:154
+- **score**:75
+- **trend**: stable
+
+###维度
+
+|维度 | 分值 |状态 |
+|------|------|------|
+| data_pipeline |24 | ✅ |
+| self_improving |13 | ✅ |
+| memory_system |20 | ✅ |
+| intuition_health |10 | ✅ |
+| self_evolving |8 | ✅ |
+
+### 本轮执行清单（HB-154,02:09）
+
+- [x] l0_watchdog.sh：02:09清醒窗口外（00-08）静默；L0正常路径
+- [x] datetime_naive_scanner：随 l0_watchdog跳过（深夜路径）
+- [x] memory-search-health：3/3 通过（RRF65.5 / systemEvent131.2 / Token Plan74.2）
+- [x] corrections抽查：31.4K（<100KB阈值）
+- [x] size-check：self-improving/corrections.md31.4K；archives/corrections_2026-06.md73KB（已归档，不压缩）
+- [x] L0 检测：memory/2026-06-11.md缺失（清醒窗口外静默段，跳过推送）
+- [x] L0昨日：memory/2026-06-10.md39237B ✅
+- [x] daily-log抽查：154 mod3 =1,跳过
+- [x] index.md 无需重建：index.md02:07:38 >= corrections.md02:07:38
+- [x] vector_store：0 天1027 chunks（新鲜，02:07:38）
+- [x] graph.jsonl2429 行（+87 自 HB-153）
+- [x] memory_sensor：0偏差
+- [x] scenes 最新：2026-06-03（8天前，已知遗留）
+- [x] heartbeat-state.json整体覆盖（run_count=154）
+- [x] heartbeat-state.md追加
+
+###已知遗留
+
+- scenes反馈回路停滞8+ 天（自2026-06-03）— medium severity
+- heartbeat-score75长期 <80 健康线
+-3/50 cron 健康风险（L1-reminder-cron timeout + PARA-Inbox整理 abort +日常安排群周报 abort）
+- L02026-06-11.md缺失（清醒窗口外静默；待08:00 后关注）
+
+###重大问题
+
+无
+
+---
+
+_由 heartbeat-maintenance cron 自动写入 |2026-06-1102:09_
+last_heartbeat: 2026-06-11T05:04:32+08:00
+last_heartbeat: 2026-06-11T06:04:58+08:00
+
+## HB-160 (08:06 清醒窗口开启)
+
+- **timestamp**: 2026-06-11T08:06:00+08:00
+- **run_count**: 160
+- **score**: 78
+- **trend**: stable
+
+### 维度
+
+| 维度 | 分值 | 状态 |
+|------|------|------|
+| data_pipeline | 28 | ✅ |
+| self_improving | 14 | ✅ |
+| memory_system | 16 | ✅ |
+| intuition_health | 15 | ✅ |
+| self_evolving | 5 | ✅ |
+
+### 本轮执行清单（HB-160, 08:06）
+
+- [x] l0_watchdog.sh：清醒窗口开启，memory/2026-06-11.md 缺失预警已推送（om_x100b6dab8f8700a8c37ceef0fe5f2d4）
+- [x] datetime_naive_scanner：随 l0_watchdog 内嵌执行
+- [x] memory-search-health：3/3 通过（RRF 66.1 / systemEvent 133.4 / Token Plan 74.9）
+- [x] memory_sensor：0 偏差（干净）
+- [x] corrections 抽查：32KB（< 100KB 阈值）
+- [x] size-check：self-improving/corrections.md 32KB；archives/corrections_2026-06.md 73KB（已归档）
+- [x] L0 检测：memory/2026-06-11.md 缺失（清醒窗口已开启，预警已发）
+- [x] L0 昨日：memory/2026-06-10.md 39237B ✅
+- [x] daily-log 抽查：160 mod 3 = 1，跳过
+- [x] index.md 无需重建：index.md 03:12 > corrections.md 02:07
+- [x] vector_store：0 天 1027 chunks（新鲜）
+- [x] graph.jsonl 2429 行（0 行 delta）
+- [x] scenes 最新：2026-06-03（8 天前，已知遗留）
+- [x] heartbeat-state.json 整体覆盖（run_count=160）
+- [x] heartbeat-state.md 追加
+
+### 已知遗留
+
+- scenes 反馈回路停滞 8+ 天（自 2026-06-03）— medium severity
+- heartbeat-score 78 长期 < 80 健康线（差距收窄）
+- 3/50 cron 健康风险（L1-reminder-cron timeout + PARA-Inbox整理 abort + 日常安排群周报 abort）
+- L0 2026-06-11.md 缺失（08:06 清醒窗口预警已推送）
+
+### 重大问题
+
+无
+
+---
+
+_由 heartbeat-maintenance cron 自动写入 | 2026-06-11 08:06_
+## Heartbeat #161 — 2026-06-11 12:04 CST
+- **l0_watchdog**: silent (24h 去重)
+- **memory_search**: 3/3 pass ✅
+- **memory_sensor**: 0 deviations
+- **corrections**: 39KB (normal)
+- **index.md**: rebuilt (corrections.md newer)
+- **score**: 78 (stable)
+
+last_heartbeat: 2026-06-11T20:06:51+08:00

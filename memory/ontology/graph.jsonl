@@ -2455,3 +2455,15 @@
 {"op": "create", "entity": {"id": "tool_daily-health-check", "type": "Tool", "properties": {"name": "daily-health-check"}}}
 {"op": "create", "entity": {"id": "tool_spawn", "type": "Tool", "properties": {"name": "spawn"}}}
 {"op": "create", "entity": {"id": "tool_session-context-compressor", "type": "Tool", "properties": {"name": "session-context-compressor"}}}
+{"op": "create", "entity": {"id": "daily_20260611", "type": "Document", "properties": {"name": "2026-06-11", "file": "/root/.openclaw/workspace/memory/2026-06-11.md", "topics": "背景, 三项深度分析, Lee 拍板（10:04）— 执行修复"}}}
+{"op": "relate", "from": "daily_20260611", "rel": "has_daily_memory", "to": "file_memory_md"}
+{"op": "create", "entity": {"id": "daily_20260610", "type": "Document", "properties": {"name": "2026-06-10", "file": "/root/.openclaw/workspace/memory/2026-06-10.md", "topics": "日常记录"}}}
+{"op": "relate", "from": "daily_20260610", "rel": "has_daily_memory", "to": "file_memory_md"}
+{"op": "create", "entity": {"id": "tool_headroomcallback", "type": "Tool", "properties": {"name": "HeadroomCallback"}}}
+{"op": "create", "entity": {"id": "tool_headroomchatmodel", "type": "Tool", "properties": {"name": "HeadroomChatModel"}}}
+{"op": "create", "entity": {"id": "tool_headroomagnomodel", "type": "Tool", "properties": {"name": "HeadroomAgnoModel"}}}
+{"op": "create", "entity": {"id": "tool_wraplanguagemodel", "type": "Tool", "properties": {"name": "wrapLanguageModel"}}}
+{"op": "create", "entity": {"id": "tool_chopratejas", "type": "Tool", "properties": {"name": "chopratejas"}}}
+{"op": "create", "entity": {"id": "tool_x-oauth-scopes", "type": "Tool", "properties": {"name": "X-OAuth-Scopes"}}}
+{"op": "create", "entity": {"id": "cron__tool_internal", "type": "CronJob", "properties": {"name": "-tool-internal"}}}
+{"op": "create", "entity": {"id": "tool_improving", "type": "Tool", "properties": {"name": "improving"}}}

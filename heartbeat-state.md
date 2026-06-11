@@ -81,3 +81,21 @@ last_heartbeat: 2026-06-04T23:02:00+08:00
 - health score: 55 (flat, same state) 
 - No files changed since last heartbeat that require index updates ⚠️
 - All systems nominal ✅
+
+last_heartbeat:2026-06-11T03:09:00+08:00
+
+##2026-06-1103:09
+- L0 watchdog: silent window (00-08) ✅
+- datetime_naive_scanner: silent_window_pass ✅
+- memory_search_health:3/3 passed ✅ (RRF间歇性回归已恢复)
+- memory_sensor:0 deviations ✅
+- ontology dry-run: no new entities (159 cron 已加载) ✅
+- vector_store:0 days old,1027 chunks ✅
+- corrections.md: workspace60K / self-improving32K (both <100K) ✅
+- graph.jsonl:2429 lines (0 delta) ✅
+- scenes:2026-06-03 (8 days stale, known issue)
+- index.md: updated ✅ (entries19,corrections mtime refresh)
+- intuition snapshot:4/49 intuition +4/49 experience (8.2% each) -15/15 score
+- health score:78 (up from75, +3 from RRF recovery) ✅
+- All systems nominal ✅
+

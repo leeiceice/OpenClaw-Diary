@@ -3058,6 +3058,48 @@
       "hit_count": 5,
       "has_vector": true,
       "error": null
+    },
+    {
+      "ts": "2026-06-11T20:06:01.977965+08:00",
+      "latency_ms": 2187.1,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-11T20:06:03.804870+08:00",
+      "latency_ms": 1756.4,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-11T20:06:07.020869+08:00",
+      "latency_ms": 3146.8,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-12T00:10:12.954339+08:00",
+      "latency_ms": 2116.2,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-12T00:10:15.593712+08:00",
+      "latency_ms": 2574.5,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-12T00:10:19.659543+08:00",
+      "latency_ms": 4000.0,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
     }
   ],
   "last_clean": "2026-05-21T16:35:25.370216"
