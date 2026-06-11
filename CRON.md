@@ -10,7 +10,7 @@
 - 并发冲突：新 cron 与已有 cron 错开 ≥30 分钟
 - timeout：进化日报 120s，每日简报 400s（长任务需按健康度规范设 ≥600s）
 - 任务完成后**立即删除** cron 提醒，避免重复发送
-- **高频 cron（≤15min）必须 `--light-context`**（2026-06-10 立）
+- **高频 cron（≤15min）必须 `lightContext: true`**（2026-06-10 立）
   - 默认 bootstrap 加载 = ~200K 字符 = ~71K tokens
   - 1min cron 跑一小时 = 4.3M tokens，超过 5h 周期额度 4.16M 的 100%
   - 修复后 jsonl 200KB → 4KB（省 50 倍）
