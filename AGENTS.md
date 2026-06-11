@@ -16,6 +16,7 @@
 
 - [ ] **L0 写入判断**：本任务是否含「重大决策 / 规范变更 / 技能升级 / 系统故障 / 偏差纠正」？是 → 立即追加 `memory/YYYY-MM-DD.md`
 - [ ] **corrections 写入判断**：本任务是否有错误 / 偏差 / 漏答？是 → 追加 `self-improving/corrections.md`
+- [ ] **session 压缩**：任务完成后写 `compressed-state-latest.json` + 检查 context 阈值
 - [ ] **反信息茧房自检**：我的判断是 Lee 想听的，还是我验证过的？是否需要说"主流反面是…"？
 
 **触发条件提醒**：收到 Lee 任何「询问 / 安排 / 待办」类消息时，第一反应 = "这个会进 L0 吗？"。会 → 立即写；不会 → 不写但必须回答。
@@ -131,21 +132,21 @@ browser     -> All above fail? Full browser control ─┘ Last resort
 
 ---
 
-## 飞书回复样式（2026-06-10 21:26 Lee 拍板 A1）
+## 飞书回复样式（2026-06-10 21:26 Lee 拍板 A1；2026-06-11 10:51 Lee 拍板 A — 停用 v3 footer）
 
-**主内容回复** 末尾 = 追发一张 v3 状态栏卡片（独立一栏，footer 在底部分两行）：
-- **第 1 行（数字）**：⚡ in tokens · out tokens · 📚 ctx% · 🗄️ cache%
-- **第 2 行（辅助）**：🧠 model · 🕒 uptime · 💵 cost
+**当前状态**：v3 footer **停用**（Lee 10:51 拍板，关掉以避免和 OpenClaw final summary 双状态栏重复）
 
-**不触发**：
-- 单字符确认（"嗯"/"好"/"OK"）
-- 简短回复 ≤20 字
-- 内部任务（sync/restart/cron）
+**过去规则**（仅留 trace，不再生效）：
+- 主内容回复末尾追发 v3 状态栏卡片（in/out/ctx/cache + model/uptime/cost）
+- 不触发 = 单字符 / ≤20 字 / 内部任务
 
-**抓数据**：`session_status` 取真实 runtime（不估算）。
+**不触发**（现行）：
+- **所有主内容回复均不带 v3 卡**（Lee 10:51 拍板停用）
+- 单字符确认 / 简短回复 / 内部任务：本来就不发（沿用旧规则）
+- **例外**：cron 任务完成、heartbeat 重要发现、Token Plan 危急预警等场景**仍需**带状态卡（这是"任务完成告知"，不是"消息 footer"）
 
 **反信息茧房自检**：
-- 一条回复一张卡 = 不刷屏
-- 数字用量 = 当次回复结束时的**真实累计**
-- v3 结构（拆两行）= 字段清晰（你 18:25 拍板）
-- 字段集（in/out/ctx/cache + model/uptime/cost）= 你 18:24 说"够用"
+- 停用原因：OpenClaw 飞书默认 streaming 完成后会推一条 final summary 卡（含 in/out tokens），v3 footer 和它视觉上重叠（Lee 10:18 反馈"对话框状态栏怎么还是重复的"）
+- 抓数据仍可用 `session_status`（不估算）— 未来如需恢复 v3 卡，看 final summary 是否能关掉
+
+**保留日志**：见 `memory/2026-06-11.md` "10:51 Lee 拍板 A — 停用 v3 footer"

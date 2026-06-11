@@ -37,3 +37,12 @@
 | 喝水记录每日重置 | ff11a8f3... | 4m ago | 脚本问题（手动run仍ERROR，非delivery） |
 | daily-health-check | bc0ff9bf... | 13h ago | 待查 |
 | 对话-Ontology管道 | f7b860cc... | 25m ago | session:current（特殊），需进一步排查 |
+
+## 2026-06-11 08:11 - cron-products-mtime-check 触发 (high severity)
+
+- **规则**: 对话-Ontology管道 (2h), cron f7b860cc-6321-4c58-8f60-0d8785156768
+- **症状**: graph.jsonl mtime 6.0h 前 (阈值 2.5h)
+- **cron 状态**: 自 2026-05-10 起持续 ERROR (session: current, 待查)
+- **本次处理**: 手动 `python3 scripts/conversation_to_ontology.py` 跑通, 新增 1 个 cron__retry_log 实体, graph.jsonl mtime 更新至 08:12
+- **重跑结果**: check_cron_products_health.py exit=0, 7/7 通过 ✅
+- **遗留问题**: cron 任务 f7b860cc... 本身仍 ERROR, 下次触发 (10:00) 可能再次失败 → 需用户在主会话排查 cron job 本身 (session: current 模式异常)

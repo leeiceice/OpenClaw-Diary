@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-09T22:30:06+08:00",
-  "total_annotations": 39,
+  "generated_at": "2026-06-11T03:13:26+08:00",
+  "total_annotations": 49,
   "distribution": {
     "guesses": {
       "count": 0,
@@ -8,15 +8,15 @@
     },
     "intuitions": {
       "count": 4,
-      "ratio": 0.103
+      "ratio": 0.082
     },
     "experiences": {
       "count": 4,
-      "ratio": 0.103
+      "ratio": 0.082
     },
     "knowledge": {
-      "count": 31,
-      "ratio": 0.795
+      "count": 41,
+      "ratio": 0.837
     }
   },
   "heartbeat_dimension": {

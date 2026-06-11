@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-06-11T18:00:00+08:00",
+  "source_session": "agent:main:main",
+  "start_ctx_ratio": 0.31,
+  "end_ctx_ratio": 0.55,
+  "delta": 0.24,
+  "models_used": ["minimax/MiniMax-M3"],
+  "tasks_completed": [
+    {
+      "task": "心跳检查 - cron 健康度持平 8/50",
+      "key_decisions": [
+        "L0 持续写入 + L1 摘要更新",
+        "⚠️ context 1h 涨 24%（cron list 输出了 50KB）",
+        "d376d8dc 误判纠正：lightContext 早就有，问题在 deepseek 服务端",
+        "L2 迁移阈值 15% 已超出（55%），等 Lee 决策"
+      ],
+      "outputs_to": [
+        "memory/2026-06-11.md (7866 字节)",
+        "proactivity/session-compress/compressed-state-latest.json"
+      ],
+      "tokens_used": {"in": 110000, "out": 1400}
+    }
+  ],
+  "pending_context": {
+    "open_questions": [
+      "L2 迁移时机：A 现在切 / B 继续扛 / C 主动瘦身？",
+      "d376d8dc 失败根因：deepseek 17:00 服务端故障，要锁 model 吗？"
+    ],
+    "waiting_for_lee": ["L2 迁移决策", "d376d8dc model 锁定"]
+  }
+}
