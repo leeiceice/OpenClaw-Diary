@@ -206,3 +206,15 @@ _由 heartbeat-maintenance cron 自动写入 | 2026-06-11 08:06_
 - **score**: 78 (stable)
 
 last_heartbeat: 2026-06-11T20:06:51+08:00
+
+## Heartbeat #167 — 2026-06-12 12:04 CST
+- **l0_watchdog**: L0 正常 (815B) | 6/50 cron 风险 (较 #166 降 1: cron-products-mtime-check 恢复)
+- **memory_search**: 3/3 pass ✅
+- **memory_sensor**: 0 deviations
+- **corrections**: 41KB (normal)
+- **index.md**: rebuilt (corrections.md 10:06 变更)
+- **score**: 82 (stable)
+- **token_plan**: 🟠 5h 剩余 11% (3708334/4166667) — 5h 周期内调用频繁
+
+last_heartbeat: 2026-06-12T12:04:50+08:00
+last_heartbeat: 2026-06-12T16:05:55+08:00
