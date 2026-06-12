@@ -7,8 +7,20 @@ from _timezone import CST
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-# 直接从 daily_book_card_prompt 拿 BOOKS 数据
-from daily_book_card_prompt import BOOKS
+# 数据源：data/books.json（990 本干净版，剔除书架 7 + 已推 19）
+_BOOKS_JSON = Path(os.path.expanduser("~/.openclaw/workspace/data/books.json"))
+
+def _load_books():
+    """从 data/books.json 加载书籍列表（兼容 list / {books: [...]} 两种结构）"""
+    with open(_BOOKS_JSON, 'r', encoding='utf-8') as f:
+        raw = json.load(f)
+    if isinstance(raw, dict) and 'books' in raw:
+        return raw['books']
+    if isinstance(raw, list):
+        return raw
+    raise ValueError(f"data/books.json 结构异常: {type(raw)}")
+
+BOOKS = _load_books()
 
 # 加载 .env 环境变量
 ENV_FILE = Path(os.path.expanduser("~/.openclaw/.env"))

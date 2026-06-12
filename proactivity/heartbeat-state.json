@@ -1,44 +1,55 @@
 {
- "timestamp": "2026-06-12T00:10:00+08:00",
- "last_heartbeat": "2026-06-12T00:10:00+08:00",
- "run_count": 164,
- "score": 85,
+ "timestamp": "2026-06-12T16:05:00+08:00",
+ "last_heartbeat": "2026-06-12T16:05:00+08:00",
+ "run_count": 168,
+ "score": 82,
  "trend": "stable",
- "previous_score": 85,
- "hour_window": "00_late_night",
- "l0_watchdog": "silent (清醒窗口外 00:00-08:00)",
- "datetime_scanner": "内嵌于 l0_watchdog.sh",
- "l0_today": "missing (00:10 正常 — L0 跨日生成在 02:00 之后)",
+ "previous_score": 82,
+ "hour_window": "16_afternoon",
+ "l0_watchdog": "L0 正常 (815B) | 5/50 cron 有健康风险 (稳定): 早间+收集汇总 LLM fail / L1-reminder timeout / PARA + 周报 aborted",
+ "datetime_scanner": "内嵌于 l0_watchdog.sh (静默)",
+ "l0_today": "815B (memory/2026-06-12.md) ✅ ≥200B",
  "l0_yesterday": "7866B (memory/2026-06-11.md) ✅",
- "l0_path": "/root/.openclaw/workspace/memory/ (确认)",
- "cron_health": "2 stale: 对话-Ontology(4h,high) + heartbeat-self(4h,low) — 待刷新",
- "vector_store_freshness": "0 days old (2026-06-12 00:10 刚刷新)",
- "corrections_size_kb": 40,
+ "l0_path": "/root/.openclaw/workspace/memory/",
+ "cron_health": "5 stale cron (稳定): 早间记忆提炼 LLM fail / 收集汇总报告 LLM fail / L1-reminder-cron timeout / PARA-Inbox整理 abort / 日常安排群周报 abort",
+ "vector_store_freshness": "0 days old (chunks: 1027)",
+ "ontology_pipeline": "graph.jsonl 16:04 更新 (本小时 fresh) ✅ ontology 反馈回路活",
+ "corrections_size_kb": 41,
  "archives_big_files": "corrections_2026-06.md 73113B (已归档)",
  "compression_needed": false,
- "compression_warning": "40KB - 正常 (<100k 阈值)",
+ "compression_warning": "41KB - 正常 (<100k 阈值)",
  "index_md_needs_rebuild": false,
  "index_md_updated_this_run": false,
- "memory_search_health": "3/3 passed ✅",
+ "index_md_reason": "self-improving/ 下无 .md 文件 mtime > index.md (12:06),无需重建",
+ "memory_search_health": "3/3 passed ✅ (RRF scores 68-139)",
  "memory_sensor_stats": "0 deviations (干净)",
+ "scenes_health": "停滞 9 天 (last: 2026-06-03) — medium severity 持续, 已知问题",
+ "scenes_status_change": "无 (与上次相同)",
  "rules_executed": {
-  "rule1_file_changes_vs_index": "无新 .md 变更 (last mod heartbeat-state.md 16:07 prior)",
-  "rule2_compression": "no files >100KB (max corrections.md 40KB)",
-  "rule3_state_update": "heartbeat-state.json 更新 (run163→164)"
+  "rule1_file_changes_vs_index": "无变更 (index.md 12:06 仍最新)",
+  "rule2_compression": "无 >100KB 文件 (最大 corrections 41KB 正常)",
+  "rule3_state_update": "heartbeat-state.json 更新 (run167→168)"
  },
  "score_breakdown": {
-  "data_pipeline": 25,
+  "data_pipeline": 30,
   "self_improving": 15,
   "memory_system": 20,
-  "intuition_health": 15,
-  "self_evolving": 10
+  "intuition_health": 14,
+  "self_evolving": 8
  },
+ "score_deduction": "self_evolving -2 (5 cron errors 持续: LLM fail + abort 模式); intuition_health -1 (scenes 反馈回路停滞 9 天,medium severity 已知)",
+ "token_budget_status": "🟢 5h 剩余 86% (3583333/4166667) — 完全恢复,本周期几乎满血",
+ "token_recovery": "从 4h 前 11% → 当前 86% (5h 周期重置)",
  "known_issues": [
-  "L0 2026-06-12.md 缺失 — 00:10 属正常 (L0 跨日生成在 02:00+ 之后)",
-  "scenes 反馈回路停滞 8 天（自 2026-06-03）— medium severity 持续",
-  "对话-Ontology 管道产物 4h 未更新 (high stale) — 阈值 2.5h",
-  "heartbeat-self 产物 4h 未更新 (low) — 本次运行会刷新"
+  "5 cron jobs health risk (与上轮一致,稳定): 早间记忆提炼+收集汇总 LLM fail / L1-reminder timeout / PARA+周报 aborted",
+  "scenes 反馈回路停滞 9 天 (自 2026-06-03) — medium severity 持续,未恶化",
+  "5h token plan 剩余 86% — 🟢 健康"
+ ],
+ "improvements_vs_last_run": [
+  "token plan 从 11% → 86% (5h 周期重置,完全恢复)",
+  "ontology pipeline 16:04 fresh 更新 (本小时活跃)",
+  "cron errors 从 6 → 5 (workspace-GitHub 自动推送恢复 1 个)"
  ],
  "major_issues": false,
- "silenced_reason": "score 85 (优秀线) ≥80; memory search 3/3 pass; corrections 正常; 无 major issue; 凌晨静默窗口 00:00-08:00"
+ "silenced_reason": "memory search 3/3 pass; ontology 反馈回路本小时 fresh; cron errors 5 个为持续 LLM fail/abort 模式(非系统故障,与上轮一致未恶化); scenes 停滞 9 天已知无新变化; token 86% 健康; 无 P0/P1"
 }

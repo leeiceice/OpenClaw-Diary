@@ -97,3 +97,11 @@ _变化：237 行 → 109 行（-54%）；拆出 COLLAB.md / ROUTING.md / CRON.m
 - ✅ 本日 L0 已写入
 - 当前主 session（M2.7）回复是直接对话，**无法**用 lightContext
 - 缺 lightContext（4）：**收集汇总报告 (287s)**、**午间记忆提炼 (201s)**、**早间记忆提炼 (177s)**、进化日报 (61s)
+
+## 每日提炼 (2026-06-12)
+- 推送安全群（chat_id=`oc_1f77586fc34cdacac8f43a4e9733eafc`），请 Lee 确认：
+- 要不要建这目录 + 配置备份脚本？
+- 还是备份本就在别的路径？
+- 未自动创建，等 Lee 拍板（外部动作先确认，红线）
+- ⏭️ `openclaw security audit`
+- ⏭️ `openclaw tasks maintenance`

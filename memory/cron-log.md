@@ -310,3 +310,10 @@
 - **备份清理**: backups/*.json、openclaw.json.bak*、before-fix.*、clobbered.* — 均无文件，无需清理
 - **状态**: ✅ 全部完成
 - **备注**: remote push URL 已从 xiaolongxia-openclaw 修正为 OpenClaw-Diary（fetch/push URL 不同步的历史遗留问题）
+
+## 2026-06-12 02:00 CST — Workspace 每日备份维护
+
+- **git pull**: Already up to date
+- **git commit & push**: 15 files changed, 2054 insertions(+), 1527 deletions(-); new: `skills/session-context-compressor/SKILL.md`; commit `f6f24cb`
+- **备份清理**: 所有目录无备份文件，无需清理
+- **状态**: ✅ 完成
