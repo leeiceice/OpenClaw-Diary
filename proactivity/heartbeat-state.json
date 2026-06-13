@@ -1,7 +1,7 @@
 {
-  "last_heartbeat": "2026-06-13T16:04:48+08:00",
-  "timestamp": "2026-06-13T16:04:48+08:00",
-  "run_count": 19,
+  "last_heartbeat": "2026-06-14T00:09:00+08:00",
+  "timestamp": "2026-06-14T00:09:00+08:00",
+  "run_count": 21,
   "counters": {
     "journal_check_count": 150
   },
@@ -16,23 +16,23 @@
   },
   "issues": [
     "RRF 拉平检测 3/3 (持续正常)",
-    "corrections.md 41KB (<100KB, 稳定)",
+    "corrections.md 40KB (<100KB, 稳定)",
     "scenes 反馈回路停滞 10+ 天 (自 2026-06-03)",
-    "graph.jsonl 健康 (2026-06-13 16:03)",
-    "L0 Watchdog 24h 去重跳过（已推送过预警）"
+    "graph.jsonl 健康",
+    "L0 Watchdog 清醒窗口外 (00:00-08:00)，本轮静默"
   ],
   "summary": {
-    "l0_watchdog": "清醒窗口内，24h 去重跳过",
-    "memory_search_health": "3/3 通过 ✅（RRF 68.9 / systemEvent 142.2 / Token Plan 77.4）",
+    "l0_watchdog": "清醒窗口外 (00:00-08:00)，静默",
+    "memory_search_health": "3/3 通过 ✅ (RRF 69.2 / systemEvent 143.1 / Token Plan 77.7)",
     "memory_sensor": "0 偏差（持续）",
     "vector_store": "查无路径，0 chunks 状态未知",
     "minimax_5h": "未取数（本轮跳过）",
-    "files_under_100k": "corrections.md 41KB 稳定（未触发压缩）",
-    "file_changes": "heartbeat-state.md 较 index.md 新（self-improve 自身状态文件，正常）",
+    "files_under_100k": "corrections.md 40KB 稳定（未触发压缩）",
+    "file_changes": "仅 heartbeat-state.md 比 index.md 新（自状态文件，正常）",
     "index_needs_update": false
   },
   "checks": {
-    "l0_watchdog": "ok (24h dedup)",
+    "l0_watchdog": "silent_window",
     "memory_search_health": "ok (3/3 passed)",
     "memory_sensor": "ok (0 deviations)",
     "compression_triggered": false,

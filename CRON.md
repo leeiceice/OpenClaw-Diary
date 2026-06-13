@@ -50,4 +50,18 @@
 
 ---
 
+## 日记生成 cron（2026-06-14 立）
+
+- **cron**：`0 0 * * * cd /root/.openclaw/workspace && python3 scripts/openclaw_diary_generator.py --date yesterday >> /tmp/diary_gen.log 2>&1`
+- **生成器参数**：`--date YYYY-MM-DD` 或 `--date yesterday`（取昨天）
+- **触发时间设计**：00:00 跑前一天日记
+  - 微信 bot 实时落盘（22:47 发 22:48 写），00:00 跑能覆盖到 23:59 的消息
+  - 原 22:30 cron 因时间窗口问题（22:30-23:59 落盘晚于触发点）漏生成（6/13 案）
+- **生成器全局变量**：`TARGET_DATE`，所有"读今天"逻辑改读它（main / load_today_memory / load_proactivity / 喝水检查 4 处）
+- **GitHub Token 注意**：log 显示 06-11/12/13 push 全 401，cron 跑前需检查 token 有效性，失败时人工兜底
+- **数据源优先级**（prompt 喂给 MiniMax）：L0 memory > proactivity log > 系统状态 > GitHub stars
+
+---
+
 _版本：1.0 | 建立：2026-06-11 | by 小龙虾_
+_版本：1.1 | 2026-06-14 新增"日记生成 cron"段（22:30→00:00 改造）| by 小龙虾_

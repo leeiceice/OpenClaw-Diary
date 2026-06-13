@@ -65,16 +65,18 @@ RULES = [
     {
         "cron_id": "f92708f2-a4b6-4dbb-bf87-20e14a12e6e3",
         "name": "午间记忆提炼 (12:30)",
-        "product": WORKSPACE / "self-improving/corrections.md",
+        "product": WORKSPACE / "MEMORY.md",
         "severity": "medium",
-        "description": "corrections.md 应每天 12:30 附近有 mtime 更新",
+        "skip_multiplier": 3.0,
+        "description": "MEMORY.md 应每天 12:30 附近有 mtime 更新 (无新条目时跳过写入, 是合法行为)",
     },
     {
         "cron_id": "823a779c-10b2-4890-8863-21905670bcb5",
         "name": "早间记忆提炼 (08:00)",
-        "product": WORKSPACE / "self-improving/corrections.md",
+        "product": WORKSPACE / "MEMORY.md",
         "severity": "medium",
-        "description": "corrections.md 应每天 08:00 附近有 mtime 更新",
+        "skip_multiplier": 3.0,
+        "description": "MEMORY.md 应每天 08:00 附近有 mtime 更新 (无新条目时跳过写入, 是合法行为)",
     },
 ]
 
@@ -145,9 +147,10 @@ def get_schedule_seconds(cron_id: str) -> tuple[int | None, dict | None]:
         con.close()
 
 
-def compute_max_age(interval_s: int) -> int:
-    """threshold = interval × 1.5 + 30 分钟容差, 至少 2.5h."""
-    return max(int(interval_s * 1.5) + 1800, 2 * 3600 + 1800)
+def compute_max_age(interval_s: int, skip_multiplier: float = 1.5) -> int:
+    """threshold = interval × skip_multiplier + 30 分钟容差, 至少 2.5h.
+    skip_multiplier > 1 适用于"无新条目可跳过"的 cron (如记忆提炼), 允许连续多天静默."""
+    return max(int(interval_s * skip_multiplier) + 1800, 2 * 3600 + 1800)
 
 
 def check_rule(rule: dict) -> dict:
@@ -155,7 +158,8 @@ def check_rule(rule: dict) -> dict:
     product = rule["product"]
     now = datetime.now(CST).timestamp()
     interval_s, sched_info = get_schedule_seconds(rule["cron_id"])
-    max_age = compute_max_age(interval_s) if interval_s else 2 * 3600 + 1800
+    skip_mult = rule.get("skip_multiplier", 1.5)
+    max_age = compute_max_age(interval_s, skip_mult) if interval_s else 2 * 3600 + 1800
     rel = lambda p: str(p.relative_to(WORKSPACE)) if p.is_absolute() else str(p)
 
     result = {
@@ -164,6 +168,7 @@ def check_rule(rule: dict) -> dict:
         "product": rel(product),
         "description": rule["description"],
         "severity": rule["severity"],
+        "skip_multiplier": skip_mult,
         "ok": True,
         "issue": None,
         "mtime_age_seconds": None,
@@ -222,7 +227,9 @@ def main() -> int:
         if not r["ok"]:
             print(f"        ⚠️  {r['issue']}")
         elif "mtime" in r:
-            print(f"        mtime: {r['mtime']}")
+            thr_h = r.get("max_age_seconds", 0) / 3600
+            thr_str = f" / 阈值 {thr_h:.1f}h" if r.get("skip_multiplier", 1.5) > 1.5 else ""
+            print(f"        mtime: {r['mtime']}{thr_str}")
 
     print()
     if failed:

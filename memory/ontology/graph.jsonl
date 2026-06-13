@@ -2490,3 +2490,4 @@
 {"op": "create", "entity": {"id": "tool_targets", "type": "Tool", "properties": {"name": "targets"}}}
 {"op": "create", "entity": {"id": "daily_20260612", "type": "Document", "properties": {"name": "2026-06-12", "file": "/root/.openclaw/workspace/memory/2026-06-12.md", "topics": "日常记录"}}}
 {"op": "relate", "from": "daily_20260612", "rel": "has_daily_memory", "to": "file_memory_md"}
+{"op": "create", "entity": {"id": "tool_token-watchdog", "type": "Tool", "properties": {"name": "token-watchdog"}}}

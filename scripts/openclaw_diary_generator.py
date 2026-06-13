@@ -58,6 +58,22 @@ def add_date_to_index_html(new_date, current_html):
     
     return current_html
 
+# ── 全局目标日期（支持 --date 覆盖）─────────────────────────
+TARGET_DATE = datetime.now(CST).strftime("%Y-%m-%d")
+
+def parse_args():
+    """支持 --date YYYY-MM-DD 或 --date yesterday"""
+    global TARGET_DATE
+    args = sys.argv[1:]
+    if "--date" in args:
+        idx = args.index("--date")
+        val = args[idx + 1] if idx + 1 < len(args) else ""
+        if val == "yesterday":
+            TARGET_DATE = (datetime.now(CST) - timedelta(days=1)).strftime("%Y-%m-%d")
+        elif val:
+            TARGET_DATE = val
+    return TARGET_DATE
+
 # ── 日志内容生成（调用 MiniMax）───────────────────────────
 def call_minimax(prompt, max_tokens=400):
     key = os.environ.get("MINIMAX_API_KEY", "")
@@ -91,12 +107,13 @@ def call_minimax(prompt, max_tokens=400):
 
 # ── 数据源读取 ──────────────────────────────────────
 def load_today_memory():
-    today = datetime.now(CST).strftime("%Y-%m-%d")
-    path = MEMORY_DIR / f"{today}.md"
+    target = TARGET_DATE
+    path = MEMORY_DIR / f"{target}.md"
     if not path.exists():
-        # 用昨天的
+        # 用目标日期的前几天回退
         for i in range(1, 7):
-            path = MEMORY_DIR / ((datetime.now(CST) - timedelta(days=i)).strftime("%Y-%m-%d") + ".md")
+            d = datetime.strptime(target, "%Y-%m-%d") - timedelta(days=i)
+            path = MEMORY_DIR / (d.strftime("%Y-%m-%d") + ".md")
             if path.exists():
                 break
     if path.exists():
@@ -121,16 +138,16 @@ def load_proactivity():
     if not log_path.exists():
         return ""
     lines = log_path.read_text(encoding="utf-8").split("\n")
-    today = datetime.now(CST).strftime("%Y-%m-%d")
-    in_today = False
+    target = TARGET_DATE
+    in_target = False
     entries = []
     for line in lines:
-        if line.strip() == f"## {today}":
-            in_today = True
+        if line.strip() == f"## {target}":
+            in_target = True
             continue
-        if in_today and line.startswith("## "):
+        if in_target and line.startswith("## "):
             break
-        if in_today and line.strip():
+        if in_target and line.strip():
             entries.append(line.strip())
     return "\n".join(entries[:8])
 
@@ -151,7 +168,7 @@ def get_system_status():
     if water.exists():
         try:
             data = json.loads(water.read_text())
-            if data.get("today") == datetime.now(CST).strftime("%Y-%m-%d"):
+            if data.get("today") == TARGET_DATE:
                 status.append(f"喝水: {data.get('cup_count',0)}杯")
         except:
             pass
@@ -193,9 +210,11 @@ def push_file(path, content, message):
 
 # ── 主流程 ─────────────────────────────────────────
 def main():
-    today = datetime.now(CST).strftime("%Y-%m-%d")
-    date_cn = datetime.now(CST).strftime("%Y年%m月%d日")
-    weekday_cn = ["周一","周二","周三","周四","周五","周六","周日"][datetime.now(CST).weekday()]
+    target = parse_args()
+    target_dt = datetime.strptime(target, "%Y-%m-%d").replace(tzinfo=CST)
+    today = target
+    date_cn = target_dt.strftime("%Y年%m月%d日")
+    weekday_cn = ["周一","周二","周三","周四","周五","周六","周日"][target_dt.weekday()]
 
     # 构建 prompt
     memory = load_today_memory()

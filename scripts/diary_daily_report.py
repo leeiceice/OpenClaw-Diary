@@ -31,6 +31,7 @@ OBSIDIAN_DIARY = Path(os.path.expanduser("~/Obsidian/日记"))
 LOCAL_RAW = Path(os.path.expanduser("~/Obsidian/日记/raw"))  # 2026-05-25: 优先读 Obsidian raw（唯一真相源）
 OBSIDIAN_RAW = Path(os.path.expanduser("~/Obsidian/日记/raw"))
 FEISHU_GROUP_ID = "oc_ad39a8e943103c2164f1d0d9de503da5"
+FEISHU_SAFE_GROUP_ID = "oc_1f77586fc34cdacac8f43a4e9733eafc"  # 2026-06-14 安全群推送
 LOG_FILE = "/tmp/diary_daily.log"
 LOCK_FILE = "/tmp/diary_daily.lock"
 FLAG_DIR = WORKSPACE / "diary" / "flags"
@@ -458,7 +459,29 @@ def main():
     if local_file.exists():
         raw_content = local_file.read_text(encoding='utf-8')
 
+    # 2026-06-14 修复：raw 为空 / messages 为 0 → 跳过、*不* 写 flag
+    # 根因：22:00 cron 跑时 22:47 后的 raw 未到，生成空模板占位（6/13 重复发生）
+    # 修复后：raw 空 → log 报警 + 推安全群 + return（不写 flag → 下次补跑能继续）
+    if not messages or len(messages) == 0:
+        log(f"⏭️ raw 为空（0 条微信消息），跳过生成（不写 flag，保留补跑机会）")
+        try:
+            subprocess.run(
+                ["openclaw", "message", "send",
+                 "--channel", "feishu",
+                 "--target", FEISHU_SAFE_GROUP_ID,
+                 "--message", f"⚠️ diary-daily {today} raw 为空跳过（不写 flag，后续 raw 到达后可重跑）"],
+                capture_output=True, text=True, timeout=15
+            )
+        except Exception as e:
+            log(f"⚠️ 推安全群失败: {e}")
+        return
+
     diary = generate_structured_diary(today, messages, raw_content)
+
+    # 2026-06-14 修复：LLM/fallback 生成内容为空 → 跳过、不写 flag
+    if not diary or not diary.strip() or len(diary.strip()) < 100:
+        log(f"⏭️ 生成内容为空/过短（{len(diary) if diary else 0} 字符），跳过（不写 flag）")
+        return
 
     save_diary_to_obsidian(diary, today)
 
