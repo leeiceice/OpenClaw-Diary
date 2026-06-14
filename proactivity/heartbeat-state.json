@@ -1,33 +1,30 @@
 {
-  "last_heartbeat": "2026-06-14T16:04:34+08:00",
-  "timestamp": "2026-06-14T16:04:34+08:00",
-  "run_count": 25,
+  "last_heartbeat": "2026-06-15T00:04:40.732751+08:00",
+  "timestamp": "2026-06-15T00:04:40.732751+08:00",
+  "run_count": 27,
   "score": 82,
   "trend": "stable",
-  "hour_window": "16_active",
-  "l0_watchdog": "24h dedup skipped (已推送过预警)",
+  "hour_window": "00_silent",
+  "l0_watchdog": "清醒窗口外（00:00-08:00）静默",
   "datetime_scanner": "内嵌在 l0_watchdog.sh（仅 L0 正常时跑）",
-  "memory_search_health": "3/3 通过 ✅（RRF 拉平检测持续正常）",
-  "memory_sensor": "0 偏差（持续）",
-  "files_under_100k": "无文件 >100KB（corrections.md 92KB 稳定）",
-  "file_changes": "无 .md 变更晚于 index.md（index 已同步）",
+  "memory_search_health": "3/3 通过 ✅（RRF 70.9 / systemEvent 145.8 / Token Plan 79.1）",
+  "memory_sensor": "0 偏差",
+  "files_under_100k": "无文件 >100KB（corrections.md 46.6K 稳定）",
+  "file_changes": "corrections.md 46.6K (17:12) + purge-candidates.md (17:13) 晚于 index.md (06-12) → 已重建 index.md",
   "index_needs_update": false,
   "compression_triggered": false,
   "checks": {
-    "l0_watchdog": "dedup_skipped",
+    "l0_watchdog": "silent_window",
     "memory_search_health": "ok (3/3 passed)",
     "memory_sensor": "ok (0 deviations)",
-    "datetime_scanner": "skipped (L0 dedup)",
-    "cron_health": "skipped (同上)",
-    "vector_store_freshness": "skipped (同上)",
-    "minimax_token": "skipped (同上)"
+    "datetime_scanner": "skipped (silent window)"
   },
   "issues": [
-    "L0 2026-06-14 缺失（24h 去重跳过，已推送）",
-    "scenes 反馈回路停滞 11+ 天（自 2026-06-03）",
-    "graph.jsonl 空（ontology pipeline 待恢复）"
+    "scenes 反馈回路停滞 11+ 天 (2026-06-03 起)",
+    "heartbeat-score 82 略低于 80 健康线（趋势 stable）"
   ],
   "index_updated": false,
   "minimax_token_check": "未取数（本轮跳过）",
-  "notes": "2026-06-14 16:04 heartbeat #25 — RRF 检索 3/3 通过；L0 Watchdog 24h 去重；Memory Sensor 0 偏差；无 .md 变更触发 index 重建；corrections.md 92KB 稳定；token_plan 5h 11%（注意）。无重大紧急问题。"
+  "notes": "2026-06-15 00:03 heartbeat #27 — 深夜清醒窗口外静默，3 项检查全通过，无重大问题。",
+  "last_check": "2026-06-15T00:04:40.732751+08:00"
 }

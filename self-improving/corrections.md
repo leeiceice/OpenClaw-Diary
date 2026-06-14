@@ -837,3 +837,77 @@ _由 小龙虾 00:19 写入_
 - **修复**: Lee 拍板后已重做：data/books.json = 990 本（997 - 7 交集），并验证 294 本书架独有未污染 997
 - **置信度**: 100%（验证通过）
 - **教训**: 涉及"备选/池/库"概念时，必须先 git log 查过去动作序列，确认剔除方向；切勿按字面执行集合操作
+
+## dev_20260614_001 — L0 自动机制反成手动（"自愈" 缺位）
+
+- **时间**: 2026-06-14 16:21-16:33
+- **偏差**: L0 Watchdog 检测到 6/14 L0 缺失 → 推 Lee 飞书"小龙虾请立即评估并补写" → 等 Lee → Lee 来推我 → 我手动建。整条链路**完全手动**,跟"自动记录"设计意图相反
+- **根因**: watchdog 脚本只报警不补,把"应该自动做的事"踢给了 Lee。L0 文件应该**始终存在**(无事件 = 占位行,后续事件自动追加)
+- **修复**: Lee 拍板 A → 改 `scripts/l0_watchdog.sh`
+  - 缺失/过小时**自动创建占位 L0**(frontmatter + 事件/决策/异常 3 段占位)
+  - 推送文案从"L0 缺口预警,小龙虾请补写" 改为 "L0 自愈报告,已自动创建占位"
+  - 锁文件机制保留(同一天不再刷屏)
+- **验证**: 删 L0 → 清锁 → 跑 watchdog → 477 字节 L0 自动建好 + 飞书推送(message_id `om_x100b6dd239c2f4a4c2552746323040e`)
+- **置信度**: 100%(脚本语法 ok + 实测自愈 + 推送 ok)
+- **教训**: 任何"自动监控系统"如果检测到异常后只报警不修复 = 半自动; 报警 + 自愈才是闭环
+- **场景适用**: 未来任何"X 应该自动 Y,如果 Y 失败就推我"的机制,X 必须能在 Y 失败时**自己**做兜底
+
+## dev_20260614_002 — 喝水脚本 D 分支无"覆盖"语义 + B 分支无 override 识别
+
+- **时间**: 2026-06-14 16:33-16:42
+- **偏差**: Lee 习惯"自然语言"输入("我喝了两杯"/"漏了一杯补上"),但脚本只支持"追加 1 杯"和"第 X 杯"两种语义
+  - 第一次实跑"2 杯"被当 1 杯 → 误推 1400ml/3 杯
+  - 第二次实跑"今日 2 杯 700ml 已重置"被当追加 2 杯 → 又误推 1400ml/3 杯
+- **根因**: 
+  1. D 分支"纯 X 杯"只走追加逻辑,无"重置当日"语义
+  2. B 分支"喝了 X 杯"无 override 关键词识别("共/漏/补/了/是/已" → 应触发覆盖)
+- **修复**: Lee 拍板 B → 改 `scripts/water_tracker.py`
+  - D 分支: 加 override 关键词检测 → 返回 `('OVERRIDE', X)` 元组
+  - B 分支: 同上加 override 关键词
+  - main 流程: 识别 OVERRIDE 元组 → projected 重置 records 为单条 + 总量 = X×350
+- **验证**（dry-run 5 用例全通过 + 实推 1 次撤回 2 次）：
+  - A「我喝了两杯」→ 700ml/2 杯 ✓
+  - B「第3杯」→ +1 杯 → 1050ml/3 杯 ✓
+  - C「漏了一杯补上」→ 350ml/1 杯 ✓
+  - D「再喝一杯」→ +1 杯 ✓
+  - E「今天共三杯」→ 1050ml/3 杯 ✓
+- **置信度**: 100%(5/5 验证 + 1 次实推撤回修正闭环)
+- **教训**: 
+  - "自然语言输入"必须覆盖"陈述事实"(今日 2 杯)与"动作"(喝了一杯)两种语义
+  - 数字+杯"必为追加"是错假设——"补/漏/共"语境下应是覆盖
+  - 测试要 dry-run + 实推 + 推送结果验证 三级一起跑,不能省
+- **场景适用**: 任何"用户自然语言计数输入"的脚本,优先区分"陈述事实"vs"执行动作",前者覆盖后者追加
+
+## dev_20260614_003 — 扫描全脚本 → 3 个潜在坑（水/GNC 同类反模式）
+
+- **时间**: 2026-06-14 17:05-17:12
+- **触发**: Lee 17:05 拍 A 全扫 + 17:09 "其他坑也扫一遍" + 17:11 "全部处理"
+- **扫描范围**: 62 个 .py 脚本 + 6 个 data json + proactivity/ + self-improving/
+- **发现 3 坑**（水/GNC 同类反模式：当日态+缺历史归档）:
+  1. **A: data/sleep-log.json** — 文件不存在，但 sleep_api.py 写它、morning_briefing 读它（读 silently fail）
+  2. **B: proactivity/intuition-snapshot.json** — 整文件覆盖，无历史（6/13 22:31 是最后一条）
+  3. **C: self-improving/drift-guard-state.json** — 整文件覆盖，无历史
+- **修复**（Lee 17:11 拍板"全部处理"）:
+  - A: 建 `scripts/sleep_tracker.py` + `data/sleep-history.jsonl`（不主动写 sleep-log.json，避免污染 morning_briefing 读 None 的现状）
+  - B: 改 `scripts/intuition_snapshot.py` main 加 `append_snapshot_history()` → `proactivity/intuition-snapshot-history.jsonl`
+  - C: 改 `scripts/memory_purge_check.py` save_drift_state 加 history append → `self-improving/drift-guard-state-history.jsonl`
+- **验证**:
+  - 坑 A selftest 5/5 + history 还原 0 字节
+  - 坑 B 实跑 1 次 → 487 字节 history OK
+  - 坑 C 实跑 1 次 → 1185 字节 history OK（**意外发现**: MEMORY.md/CRON.md/SOUL.md drift 报警，已被 history 记录）
+  - 3 套 selftest: water 5/5 + gnc 5/5 + sleep 5/5
+  - 原文件未污染
+- **置信度**: 100%（脚本语法 ok + 实跑验证 + selftest 全过）
+- **教训**:
+  - "当日态+整覆盖"是历史丢失的反模式（水/GNC/intuition/drift 都有）
+  - **扫描要"看脚本写什么+读什么",只看一个 data 文件会漏**
+  - sleep_log 文件不存在是"读 silently fail"类坑，比"丢历史"更隐蔽
+  - 不擅自重建缺失文件（避免污染读 None 的现状），用 history append 兜底
+- **drift 报警附注**（17:12 实跑触发）:
+  - MEMORY.md hash 变了 → 17:05 之后有人改
+  - CRON.md hash 变了 → 17:05 之后有人改
+  - SOUL.md hash 变了 → 17:05 之后有人改
+  - **我没改过 SOUL/AGENTS/TOOLS**（16:57 拍板"不需要"）
+  - 可能是 cron / l0_watchdog 触发？或 Lee 自己在别处改？
+  - 已被 drift-guard-state-history.jsonl 记录，未来可查
+

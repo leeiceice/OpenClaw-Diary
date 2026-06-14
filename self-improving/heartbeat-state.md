@@ -231,3 +231,17 @@ last_heartbeat: 2026-06-13T20:04:29+08:00
 - **index.md**: 不需重建（无 .md 变更，除 heartbeat-state.md 自更新）
 
 last_heartbeat: 2026-06-14T00:11:09+08:00
+last_heartbeat: 2026-06-14T04:04:27+08:00
+last_heartbeat: 2026-06-14T08:04:00+08:00
+last_heartbeat: 2026-06-14T16:04:34+08:00
+last_heartbeat: 2026-06-14T20:04:27+08:00
+last_heartbeat: 2026-06-15T00:04:40+08:00
+
+## Heartbeat #27 — 2026-06-15 00:04 CST
+- **l0_watchdog**: 清醒窗口外（00:00-08:00）静默
+- **memory_search**: 3/3 pass ✅ (RRF 70.9 / systemEvent 145.8 / Token Plan 79.1)
+- **memory_sensor**: 0 deviations
+- **corrections**: 46.6KB (normal)
+- **index.md**: 不需重建（index.md 20:04 > corrections.md 17:13）
+- **score**: 82 (stable)
+- **trend**: stable

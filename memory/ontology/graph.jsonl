@@ -2505,3 +2505,21 @@
 {"op": "create", "entity": {"id": "tool_skip_threshold_hours", "type": "Tool", "properties": {"name": "skip_threshold_hours"}}}
 {"op": "create", "entity": {"id": "tool_skip_multiplier", "type": "Tool", "properties": {"name": "skip_multiplier"}}}
 {"op": "create", "entity": {"id": "cron_vector_store", "type": "CronJob", "properties": {"name": "vector_store"}}}
+{"op": "create", "entity": {"id": "daily_20260614", "type": "Document", "properties": {"name": "2026-06-14", "file": "/root/.openclaw/workspace/memory/2026-06-14.md", "topics": "16:21 — L0 Watchdog 二次推送（L0 缺口预警）, 16:23 — Lee 飞书\"检查下\", 触发链"}}}
+{"op": "relate", "from": "daily_20260614", "rel": "has_daily_memory", "to": "file_memory_md"}
+{"op": "create", "entity": {"id": "daily_20260613", "type": "Document", "properties": {"name": "2026-06-13", "file": "/root/.openclaw/workspace/memory/2026-06-13.md", "topics": "日常记录"}}}
+{"op": "relate", "from": "daily_20260613", "rel": "has_daily_memory", "to": "file_memory_md"}
+{"op": "create", "entity": {"id": "cron_architect", "type": "CronJob", "properties": {"name": "ARCHITECT"}}}
+{"op": "create", "entity": {"id": "person_曾国藩", "type": "Person", "properties": {"name": "曾国藩"}}}
+{"op": "create", "entity": {"id": "cron_weekly_cron_audit_v2", "type": "CronJob", "properties": {"name": "weekly-cron-audit-v2"}}}
+{"op": "create", "entity": {"id": "tool_parse_result", "type": "Tool", "properties": {"name": "parse_result"}}}
+{"op": "create", "entity": {"id": "tool_drank_match", "type": "Tool", "properties": {"name": "drank_match"}}}
+{"op": "create", "entity": {"id": "tool_water_history", "type": "Tool", "properties": {"name": "water_history"}}}
+{"op": "create", "entity": {"id": "tool_water_aggregate", "type": "Tool", "properties": {"name": "water_aggregate"}}}
+{"op": "create", "entity": {"id": "tool_water_query", "type": "Tool", "properties": {"name": "water_query"}}}
+{"op": "create", "entity": {"id": "script_water_history_query.py", "type": "Script", "properties": {"name": "water_history_query.py"}}}
+{"op": "create", "entity": {"id": "script_gnc_tracker.py", "type": "Script", "properties": {"name": "gnc_tracker.py"}}}
+{"op": "create", "entity": {"id": "script_gnc_history_query.py", "type": "Script", "properties": {"name": "gnc_history_query.py"}}}
+{"op": "create", "entity": {"id": "script_sleep_tracker.py", "type": "Script", "properties": {"name": "sleep_tracker.py"}}}
+{"op": "create", "entity": {"id": "tool_--active", "type": "Tool", "properties": {"name": "--active"}}}
+{"op": "create", "entity": {"id": "tool_--kinds", "type": "Tool", "properties": {"name": "--kinds"}}}
