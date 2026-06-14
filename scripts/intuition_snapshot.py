@@ -107,6 +107,19 @@ def build_snapshot() -> dict:
     return snapshot
 
 
+def append_snapshot_history(snapshot: dict) -> dict:
+    """追加一条到 proactivity/intuition-snapshot-history.jsonl（2026-06-14 Lee 拍板 B：加 history）"""
+    history_path = SNAPSHOT_PATH.parent / "intuition-snapshot-history.jsonl"
+    try:
+        history_path.parent.mkdir(parents=True, exist_ok=True)
+        line = json.dumps(snapshot, ensure_ascii=False)
+        with open(history_path, 'a', encoding="utf-8") as f:
+            f.write(line + '\n')
+        return {"ok": True, "path": str(history_path)}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
 def main() -> int:
     """主入口"""
     try:
@@ -116,6 +129,12 @@ def main() -> int:
             json.dumps(snapshot, ensure_ascii=False, indent=2),
             encoding="utf-8"
         )
+        # 2026-06-14 Lee 拍板 B：追加历史（保留每一份快照）
+        hres = append_snapshot_history(snapshot)
+        if hres['ok']:
+            print(f"📜 快照历史已 append → {hres['path']}")
+        else:
+            print(f"⚠️ 历史 append 失败：{hres.get('error')}")
         print(f"✅ 快照已写入: {SNAPSHOT_PATH}")
         print(f"   total={snapshot['total_annotations']}")
         print(f"   distribution={snapshot['distribution']}")

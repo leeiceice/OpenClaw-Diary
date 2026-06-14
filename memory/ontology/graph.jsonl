@@ -2491,3 +2491,17 @@
 {"op": "create", "entity": {"id": "daily_20260612", "type": "Document", "properties": {"name": "2026-06-12", "file": "/root/.openclaw/workspace/memory/2026-06-12.md", "topics": "日常记录"}}}
 {"op": "relate", "from": "daily_20260612", "rel": "has_daily_memory", "to": "file_memory_md"}
 {"op": "create", "entity": {"id": "tool_token-watchdog", "type": "Tool", "properties": {"name": "token-watchdog"}}}
+{"op": "create", "entity": {"id": "cron_association_batch_backfill", "type": "CronJob", "properties": {"name": "association-batch-backfill"}}}
+{"op": "create", "entity": {"id": "tool_add_date_to_index_html", "type": "Tool", "properties": {"name": "add_date_to_index_html"}}}
+{"op": "create", "entity": {"id": "tool_--date", "type": "Tool", "properties": {"name": "--date"}}}
+{"op": "create", "entity": {"id": "tool_load_proactivity", "type": "Tool", "properties": {"name": "load_proactivity"}}}
+{"op": "create", "entity": {"id": "tool_target_date", "type": "Tool", "properties": {"name": "TARGET_DATE"}}}
+{"op": "create", "entity": {"id": "tool_parse_args", "type": "Tool", "properties": {"name": "parse_args"}}}
+{"op": "create", "entity": {"id": "tool_yesterday", "type": "Tool", "properties": {"name": "yesterday"}}}
+{"op": "create", "entity": {"id": "tool_diary-daily", "type": "Tool", "properties": {"name": "diary-daily"}}}
+{"op": "create", "entity": {"id": "tool_diary_date", "type": "Tool", "properties": {"name": "DIARY_DATE"}}}
+{"op": "create", "entity": {"id": "tool_push_to_feishu_safe", "type": "Tool", "properties": {"name": "push_to_feishu_safe"}}}
+{"op": "create", "entity": {"id": "tool_tool_token-watchdog", "type": "Tool", "properties": {"name": "tool_token-watchdog"}}}
+{"op": "create", "entity": {"id": "tool_skip_threshold_hours", "type": "Tool", "properties": {"name": "skip_threshold_hours"}}}
+{"op": "create", "entity": {"id": "tool_skip_multiplier", "type": "Tool", "properties": {"name": "skip_multiplier"}}}
+{"op": "create", "entity": {"id": "cron_vector_store", "type": "CronJob", "properties": {"name": "vector_store"}}}

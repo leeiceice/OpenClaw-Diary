@@ -1,41 +1,33 @@
 {
-  "last_heartbeat": "2026-06-14T00:09:00+08:00",
-  "timestamp": "2026-06-14T00:09:00+08:00",
-  "run_count": 21,
-  "counters": {
-    "journal_check_count": 150
-  },
-  "score": 72,
+  "last_heartbeat": "2026-06-14T16:04:34+08:00",
+  "timestamp": "2026-06-14T16:04:34+08:00",
+  "run_count": 25,
+  "score": 82,
   "trend": "stable",
-  "dimensions": {
-    "data_pipeline": 26,
-    "self_improving": 14,
-    "memory_system": 14,
-    "intuition_health": 8,
-    "self_evolving": 3
-  },
-  "issues": [
-    "RRF 拉平检测 3/3 (持续正常)",
-    "corrections.md 40KB (<100KB, 稳定)",
-    "scenes 反馈回路停滞 10+ 天 (自 2026-06-03)",
-    "graph.jsonl 健康",
-    "L0 Watchdog 清醒窗口外 (00:00-08:00)，本轮静默"
-  ],
-  "summary": {
-    "l0_watchdog": "清醒窗口外 (00:00-08:00)，静默",
-    "memory_search_health": "3/3 通过 ✅ (RRF 69.2 / systemEvent 143.1 / Token Plan 77.7)",
-    "memory_sensor": "0 偏差（持续）",
-    "vector_store": "查无路径，0 chunks 状态未知",
-    "minimax_5h": "未取数（本轮跳过）",
-    "files_under_100k": "corrections.md 40KB 稳定（未触发压缩）",
-    "file_changes": "仅 heartbeat-state.md 比 index.md 新（自状态文件，正常）",
-    "index_needs_update": false
-  },
+  "hour_window": "16_active",
+  "l0_watchdog": "24h dedup skipped (已推送过预警)",
+  "datetime_scanner": "内嵌在 l0_watchdog.sh（仅 L0 正常时跑）",
+  "memory_search_health": "3/3 通过 ✅（RRF 拉平检测持续正常）",
+  "memory_sensor": "0 偏差（持续）",
+  "files_under_100k": "无文件 >100KB（corrections.md 92KB 稳定）",
+  "file_changes": "无 .md 变更晚于 index.md（index 已同步）",
+  "index_needs_update": false,
+  "compression_triggered": false,
   "checks": {
-    "l0_watchdog": "silent_window",
+    "l0_watchdog": "dedup_skipped",
     "memory_search_health": "ok (3/3 passed)",
     "memory_sensor": "ok (0 deviations)",
-    "compression_triggered": false,
-    "index_updated": false
-  }
+    "datetime_scanner": "skipped (L0 dedup)",
+    "cron_health": "skipped (同上)",
+    "vector_store_freshness": "skipped (同上)",
+    "minimax_token": "skipped (同上)"
+  },
+  "issues": [
+    "L0 2026-06-14 缺失（24h 去重跳过，已推送）",
+    "scenes 反馈回路停滞 11+ 天（自 2026-06-03）",
+    "graph.jsonl 空（ontology pipeline 待恢复）"
+  ],
+  "index_updated": false,
+  "minimax_token_check": "未取数（本轮跳过）",
+  "notes": "2026-06-14 16:04 heartbeat #25 — RRF 检索 3/3 通过；L0 Watchdog 24h 去重；Memory Sensor 0 偏差；无 .md 变更触发 index 重建；corrections.md 92KB 稳定；token_plan 5h 11%（注意）。无重大紧急问题。"
 }

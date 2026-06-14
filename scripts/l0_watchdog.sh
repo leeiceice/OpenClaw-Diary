@@ -44,23 +44,55 @@ else
   exit 0
 fi
 
-# 推送安全群
-MSG="🦞 L0 缺口预警
+# === 2026-06-14 自愈（Lee 拍板 A）===
+# 缺失或过小时：自动创建占位 L0，再推告知（不再等 Lee 推我）
+AUTO_CREATED="false"
+if [ ! -f "$L0_FILE" ]; then
+  AUTO_CREATED="true"
+  NOW_ISO=$(TZ=Asia/Shanghai date -Iseconds)
+  cat > "$L0_FILE" <<EOF
+---
+date: ${TODAY}
+type: l0-daily
+agent: 小龙虾
+created: ${NOW_ISO}
+status: auto-created
+trigger: l0_watchdog.sh (heartbeat 触发,Lee 拍板 A 改造)
+---
+
+# ${TODAY} L0（auto-created 占位）
+
+## 事件
+（暂无 — heartbeat 自愈建文件，后续 cron / 真实事件会自动追加）
+
+## 决策
+（暂无）
+
+## 异常
+（暂无）
+
+---
+
+_auto-created by l0_watchdog.sh at ${NOW_ISO} — heartbeat 自愈机制（Lee 拍板 A）_
+EOF
+  SIZE=$(stat -c %s "$L0_FILE")
+  STATUS="auto_created"
+fi
+
+# 推送安全群（只告知，不再要求立即人工补）
+MSG="🦞 L0 自愈报告
 日期：${TODAY}
-状态：${STATUS}（文件不存在或 < ${MIN_SIZE} 字节）
+状态：${STATUS}（${SIZE} 字节）
 路径：${L0_FILE}
+动作：watchdog 已自动创建占位 L0，后续事件会按时间自动追加
+（Lee 2026-06-14 拍板 A：自愈不再等人工介入）"
 
-→ 原因：实时写入全靠手动，无机制保证
-→ 修复：见 corrections.md dev_20260607_001
-→ 动作：小龙虾请立即评估并补写"
-
-# 用 openclaw message send 推送到安全群
 openclaw message send \
   --channel feishu \
   --target oc_1f77586fc34cdacac8f43a4e9733eafc \
   --message "$MSG" \
   2>&1 || echo "[L0 Watchdog] ⚠️ 推送失败，请人工检查"
 
-# 写锁文件（24h 去重）
+# 写锁文件（24h 去重 — 即便后续再跑也不再推）
 touch "$LOCK_FILE"
-echo "[L0 Watchdog] ${TODAY} 预警已推送（${STATUS}）"
+echo "[L0 Watchdog] ${TODAY} ${STATUS}（已自愈+推告知）"

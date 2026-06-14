@@ -23,6 +23,7 @@ FEISHU_DAILY_CHAT_TARGET = f"chat:{FEISHU_DAILY_CHAT_ID}"
 
 LOG_FILE = Path("~/.openclaw/workspace/data/water-log.json").expanduser()
 WORKSPACE = Path("~/.openclaw/workspace").expanduser()
+HISTORY_FILE = Path("~/.openclaw/workspace/data/water-history.jsonl").expanduser()  # 2026-06-14 Lee 拍 A+A：历史永不清空
 
 WATER_KEYWORDS = [
     "喝了一杯", "一杯", "一杯水", "喝了一杯水",
@@ -45,6 +46,35 @@ def load_log():
 def save_log(data):
     with open(LOG_FILE, 'w') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+def append_history(data: dict, mode: str, override_cups: int = 0) -> dict:
+    """
+    追加一条到 data/water-history.jsonl（2026-06-14 Lee 拍 A+A）
+    - 覆盖模式：写 1 条（今日总量 = override_cups × cup_ml）
+    - 追加模式：写 1 条（本次增量的 ml）
+    返回：{ok, line, path}
+    """
+    now = datetime.now(CST)
+    last_record = data['records'][-1] if data.get('records') else {}
+    entry = {
+        "ts": now.isoformat(),
+        "date": now.strftime("%Y-%m-%d"),
+        "time": now.strftime("%H:%M"),
+        "ml": data['total_ml'] if mode == 'override' else last_record.get('ml', 0),
+        "cups_total": data['cup_count'],
+        "ml_total": data['total_ml'],
+        "mode": mode,  # 'append' | 'override'
+        "note": last_record.get('note', ''),
+    }
+    if mode == 'override':
+        entry['override_cups'] = override_cups
+    line = json.dumps(entry, ensure_ascii=False)
+    try:
+        with open(HISTORY_FILE, 'a') as f:
+            f.write(line + '\n')
+        return {"ok": True, "line": line, "path": str(HISTORY_FILE)}
+    except Exception as e:
+        return {"ok": False, "error": str(e), "path": str(HISTORY_FILE)}
 
 def is_water_message(text: str) -> bool:
     text_lower = text.lower()
@@ -90,6 +120,8 @@ def process_messages(text: str) -> int:
             return max(0, delta) * 350
 
     # B：包含「喝了X杯」 → 本次+1杯
+    # 2026-06-14 Lee 拍板 B：含 override 关键词 → 走覆盖模式
+    override_keywords_b = ['共', '漏', '补', '总共', '一共', '今天', '今早', '了']  # 「我喝了」= 事实陈述，可能是补录
     drank_match = re.search(r'喝了[一二三四五六七八九十两0-9]+\s*杯', text)
     if drank_match or has_drunk:
         # 抽 X 作为修饰（默认1）
@@ -98,14 +130,26 @@ def process_messages(text: str) -> int:
         if num_match:
             cn = num_match.group(1)
             cups = CN_NUM_MAP.get(cn, 0) or (int(cn) if cn.isdigit() else 1) or 1
+        # 覆盖语义检查：含「共/漏/补/今天」等 → 重置当日为 X 杯
+        if any(kw in text for kw in override_keywords_b):
+            return ('OVERRIDE', cups)
         return cups * 350
 
-    # D：纯「X杯」 → 直接量
+    # D：纯「X杯」 → 直接量（追加 X 杯）
+    # 2026-06-14 Lee 拍板 B：增加「共/漏/补/了」覆盖语义关键词
+    #   例：「我喝了两杯」「漏记了一杯」「补两杯」「今天共三杯」「今日 2 杯」 → 覆盖当日记录为 X 杯
+    #   例：「再来一杯」「再喝一杯」 → 追加 1 杯（D 旧行为）
+    override_keywords = ['共', '漏', '补', '总共', '一共', '今天', '今早', '了', '是', '已']
+    is_override = any(kw in text for kw in override_keywords)
+
     direct_match = re.search(r'([一二三四五六七八九十两]+|\d+)\s*杯', text)
     if direct_match:
         cn = direct_match.group(1)
         cups = CN_NUM_MAP.get(cn, 0) or (int(cn) if cn.isdigit() else 0) or 0
         if cups > 0:
+            if is_override:
+                # 覆盖模式：返回特殊标记，让 save_log 识别并重置当日
+                return ('OVERRIDE', cups)
             return cups * 350
 
     # E：其他喝水意图 → +1
@@ -220,8 +264,17 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     text = ' '.join(args.text)
-    ml = process_messages(text)
-    print(f"解析结果:{ml}ml")
+    parse_result = process_messages(text)
+
+    # 2026-06-14 Lee 拍板 B：OVERRIDE 模式（覆盖当日记录）
+    is_override_mode = isinstance(parse_result, tuple) and parse_result[0] == 'OVERRIDE'
+    if is_override_mode:
+        override_cups = parse_result[1]
+        ml = override_cups * 350
+        print(f"解析结果:[OVERRIDE] {override_cups}杯 = {ml}ml（覆盖当日记录）")
+    else:
+        ml = parse_result
+        print(f"解析结果:{ml}ml")
 
     if ml == 0:
         print("未识别到喝水量,忽略")
@@ -234,20 +287,31 @@ if __name__ == '__main__':
         log = {"today": today, "total_ml": 0, "cup_count": 0,
                "goal_ml": 2000, "cup_ml": 350, "records": []}
 
-    if is_duplicate_recent(log, seconds=120):
+    if not is_override_mode and is_duplicate_recent(log, seconds=120):
         print("⚠️ 检测到重复记录(2分钟内相同杯数),已忽略")
         print(format_reply(log))
         sys.exit(0)
 
     # 预计算累积值（不保存，用于打印）
     projected = dict(log)
-    projected['total_ml'] = log['total_ml'] + ml
-    projected['cup_count'] = log['cup_count'] + 1
-    projected['records'] = log['records'] + [{
-        "time": datetime.now(CST).strftime("%Y-%m-%d %H:%M"),
-        "ml": ml,
-        "note": f"第{projected['cup_count']}杯"
-    }]
+    if is_override_mode:
+        # 覆盖模式：重置 records 为单条 + 注上「共/补/漏」语义
+        now_str = datetime.now(CST).strftime("%Y-%m-%d %H:%M")
+        projected['total_ml'] = ml
+        projected['cup_count'] = override_cups
+        projected['records'] = [{
+            "time": now_str,
+            "ml": ml,
+            "note": f"覆盖补录 {override_cups} 杯（Lee 16:42 拍板 B 脚本改造）"
+        }]
+    else:
+        projected['total_ml'] = log['total_ml'] + ml
+        projected['cup_count'] = log['cup_count'] + 1
+        projected['records'] = log['records'] + [{
+            "time": datetime.now(CST).strftime("%Y-%m-%d %H:%M"),
+            "ml": ml,
+            "note": f"第{projected['cup_count']}杯"
+        }]
 
     reply_text = format_reply(projected)
 
@@ -264,6 +328,10 @@ if __name__ == '__main__':
         log['cup_count'] = projected['cup_count']
         log['records'] = projected['records']
         save_log(log)
+        # 2026-06-14 Lee 拍 A+A：追加历史
+        hres = append_history(log, 'override' if is_override_mode else 'append', override_cups if is_override_mode else 0)
+        if hres['ok']:
+            print(f"[history] appended → {hres['path']}")
         card_path = generate_card()
         print(reply_text)
         print(f"__CARD_PATH__:{card_path}")
@@ -271,6 +339,12 @@ if __name__ == '__main__':
 
     # 正常路径：保存记录 + 生成卡片 + 异步推送
     save_log(projected)
+    # 2026-06-14 Lee 拍 A+A：追加历史
+    hres = append_history(projected, 'override' if is_override_mode else 'append', override_cups if is_override_mode else 0)
+    if hres['ok']:
+        print(f"[history] appended → {hres['path']}")
+    else:
+        print(f"[history] ⚠️ append failed: {hres.get('error')}")
 
     # 默认流程：生成卡片 + 推送飞书（文字+图片同发）
     card_path = generate_card()

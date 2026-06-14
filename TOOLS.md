@@ -66,6 +66,8 @@ Skills define _how_ tools work. This file is for _your_ specifics - the stuff th
 | 目标 | 每日 2000ml = 6杯 × 350ml/杯 |
 | 杯容量 | 350ml |
 | 数量歧义 | "第X杯"=1杯，"X杯"=X杯；不明确时先问 Lee |
+| **推送目标** | **飞书「日常安排群」** `oc_ad39a8e943103c2164f1d0d9de503da5`（2026-06-14 Lee 拍板：所有喝水反馈文字+卡片图推此群）|
+| **覆盖语义** | 含「共/漏/补/了/是/已」关键词 → 覆盖当日记录为 X 杯（2026-06-14 拍板 B 改造）|
 
 ---
 

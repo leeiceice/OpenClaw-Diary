@@ -67,6 +67,17 @@ def load_drift_state() -> dict:
 def save_drift_state(state: dict):
     DRIFT_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     DRIFT_STATE_FILE.write_text(json.dumps(state, indent=2, ensure_ascii=False))
+    # 2026-06-14 Lee 拍板 C：追加历史（保留每份 state）
+    history_path = DRIFT_STATE_FILE.parent / "drift-guard-state-history.jsonl"
+    try:
+        with open(history_path, 'a', encoding="utf-8") as f:
+            from datetime import datetime, timezone, timedelta
+            now = datetime.now(timezone(timedelta(hours=8)))
+            entry = {"ts": now.isoformat(), **state}
+            f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+        print(f"[drift-guard] 历史已 append → {history_path}")
+    except Exception as e:
+        print(f"[drift-guard] ⚠️ 历史 append 失败：{e}")
     print(f"[drift-guard] 状态已写入 {DRIFT_STATE_FILE}")
 
 
