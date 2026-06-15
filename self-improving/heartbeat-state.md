@@ -245,3 +245,43 @@ last_heartbeat: 2026-06-15T00:04:40+08:00
 - **index.md**: 不需重建（index.md 20:04 > corrections.md 17:13）
 - **score**: 82 (stable)
 - **trend**: stable
+
+## Heartbeat #28 — 2026-06-15 04:04 CST
+- **l0_watchdog**: 清醒窗口外（00:00-08:00）静默
+- **memory_search**: 3/3 pass ✅ (RRF 70.9 / systemEvent 146.3 / Token Plan 79.3)
+- **memory_sensor**: 0 deviations
+- **corrections**: 46.6KB (normal)
+- **index.md**: 不需重建（index.md 20:04 > corrections.md 17:13）
+- **score**: 82 (stable)
+- **trend**: stable
+
+
+## Heartbeat #29 — 2026-06-15 08:10 CST
+- **l0_watchdog**: 清醒窗口外（00:00-08:00）静默 → 08:00 后激活并自愈
+- **memory_search**: 3/3 pass ✅ (RRF 71.1 / systemEvent 146.7 / Token Plan 79.5)
+- **memory_sensor**: 0 deviations
+- **corrections**: 46.6KB (stable)
+- **index.md**: 不需重建（index.md 20:04 > corrections.md 17:13）
+- **files >100KB**: 无
+- **score**: 82 (stable)
+- **trend**: stable
+
+## Heartbeat #31 — 2026-06-15 16:05 CST
+- **l0_watchdog**: 24h 去重静默（已推送过）
+- **memory_search**: 3/3 pass ✅ (RRF 71.9 / systemEvent 149.3 / Token Plan 80.5)
+- **memory_sensor**: 0 deviations
+- **corrections**: 51.6KB（+2KB from #29，监控中）
+- **file_changes**: corrections.md 14:41 + validated.md 14:35 → 已重建 index
+- **files >100KB**: 无
+- **score**: 82 (stable)
+- **trend**: stable
+
+## Heartbeat #33 — 2026-06-16 00:03 CST
+- **l0_watchdog**: 清醒窗口外（00:00-08:00）静默
+- **memory_search**: 3/3 pass ✅ (RRF 72.3 / systemEvent 150.3 / Token Plan 80.8)
+- **memory_sensor**: 0 deviations
+- **corrections**: 51.6KB (stable)
+- **index.md**: 不需重建（heartbeat-state.md 16:07 > corrections.md 14:41）
+- **files >100KB**: 无
+- **score**: 82 (stable)
+- **trend**: stable

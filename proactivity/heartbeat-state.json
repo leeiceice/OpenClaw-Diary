@@ -1,32 +1,31 @@
 {
-  "last_heartbeat": "2026-06-15T16:05:00+08:00",
-  "timestamp": "2026-06-15T16:05:00+08:00",
-  "run_count": 31,
+  "last_heartbeat": "2026-06-16T00:03:52+08:00",
+  "timestamp": "2026-06-16T00:03:52+08:00",
+  "run_count": 33,
   "score": 82,
   "trend": "stable",
-  "hour_window": "afternoon",
-  "l0_watchdog": "已推送过预警（24h 去重跳过）",
+  "hour_window": "late_night",
+  "l0_watchdog": "清醒窗口外（00:00-08:00），静默",
   "datetime_scanner": "内嵌在 l0_watchdog.sh（仅 L0 正常时跑）",
-  "memory_search_health": "3/3 通过 ✅（RRF 71.9 / systemEvent 149.3 / Token Plan 80.5）",
+  "memory_search_health": "3/3 通过 ✅（RRF 72.3 / systemEvent 150.3 / Token Plan 80.8）",
   "memory_sensor": "0 偏差",
   "files_under_100k": "无文件 >100KB（corrections.md 51.6K 稳定增长）",
-  "file_changes": "corrections.md @ 06-15 14:41 + validated.md @ 06-15 14:35 晚于 index @ 06-15 12:04 → 已重建 index",
-  "index_needs_update": true,
-  "index_updated": true,
+  "file_changes": "heartbeat-state.md @ 06-16 00:03 + index.md 06-15 16:06 同步（无需重建）",
+  "index_needs_update": false,
+  "index_updated": false,
   "compression_triggered": false,
   "checks": {
-    "l0_watchdog": "ok (24h dedup skipped)",
-    "memory_search_health": "ok (3/3 passed)",
+    "l0_watchdog": "skipped (sleep window 00:00-08:00)",
+    "memory_search_health": "ok (3/3 passed, RRF 72.26 / systemEvent 150.26 / Token Plan 80.84)",
     "memory_sensor": "ok (0 deviations)",
-    "datetime_scanner": "skipped (L0 dedup)"
+    "datetime_scanner": "skipped (sleep window)"
   },
   "issues": [
     "scenes 反馈回路停滞 12+ 天 (2026-06-03 起)",
     "heartbeat-score 82 略高于 80 健康线（趋势 stable）",
-    "corrections.md 持续增长（51.6K，监控中）",
-    "validated.md 新增条目未索引（已修复）"
+    "corrections.md 持续增长（51.6K，监控中）"
   ],
   "minimax_token_check": "未取数（本轮跳过）",
-  "notes": "2026-06-15 16:05 heartbeat #31 — 下午静默窗口，所有检查通过，index 已重建并加入 validated.md，无重大问题。",
-  "last_check": "2026-06-15T16:05:00+08:00"
+  "notes": "2026-06-16 00:03 heartbeat #33 — 凌晨静默窗口（00:00-08:00），L0 watchdog 跳过。所有检查通过，无重大问题。index.md 与 heartbeat-state.md 时序一致，无需重建。",
+  "last_check": "2026-06-16T00:03:52+08:00"
 }

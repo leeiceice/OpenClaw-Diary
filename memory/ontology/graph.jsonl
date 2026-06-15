@@ -2538,3 +2538,7 @@
 {"op": "create", "entity": {"id": "tool_append_history", "type": "Tool", "properties": {"name": "append_history"}}}
 {"op": "create", "entity": {"id": "tool_backfill_history_if_needed", "type": "Tool", "properties": {"name": "backfill_history_if_needed"}}}
 {"op": "create", "entity": {"id": "tool_mode", "type": "Tool", "properties": {"name": "mode"}}}
+{"op": "create", "entity": {"id": "daily_20260615", "type": "Document", "properties": {"name": "2026-06-15", "file": "/root/.openclaw/workspace/memory/2026-06-15.md", "topics": "日常记录"}}}
+{"op": "relate", "from": "daily_20260615", "rel": "has_daily_memory", "to": "file_memory_md"}
+{"op": "create", "entity": {"id": "tool_index-pack", "type": "Tool", "properties": {"name": "index-pack"}}}
+{"op": "create", "entity": {"id": "tool_git-credentials", "type": "Tool", "properties": {"name": "git-credentials"}}}

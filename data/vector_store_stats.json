@@ -1,174 +1,6 @@
 {
   "queries": [
     {
-      "ts": "2026-06-08T17:04:29.133374+08:00",
-      "latency_ms": 2627.4,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T17:04:31.027067+08:00",
-      "latency_ms": 1805.7,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T17:04:33.205949+08:00",
-      "latency_ms": 2112.9,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T18:04:01.936119+08:00",
-      "latency_ms": 2204.5,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T18:04:03.885328+08:00",
-      "latency_ms": 1881.5,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T18:04:06.292872+08:00",
-      "latency_ms": 2343.8,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T19:04:10.168746+08:00",
-      "latency_ms": 2550.2,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T19:04:12.128865+08:00",
-      "latency_ms": 1894.1,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T19:04:15.809801+08:00",
-      "latency_ms": 3615.5,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T20:04:38.797260+08:00",
-      "latency_ms": 2319.0,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T20:04:41.176831+08:00",
-      "latency_ms": 2314.8,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T20:04:43.014793+08:00",
-      "latency_ms": 1773.9,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T21:04:05.146254+08:00",
-      "latency_ms": 2281.4,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T21:04:06.810614+08:00",
-      "latency_ms": 1600.5,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T21:04:08.746029+08:00",
-      "latency_ms": 1872.6,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T22:05:32.212161+08:00",
-      "latency_ms": 2394.9,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T22:05:33.894113+08:00",
-      "latency_ms": 1620.5,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T22:05:36.282465+08:00",
-      "latency_ms": 2324.2,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T22:05:43.051882+08:00",
-      "latency_ms": 1506.1,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T22:05:45.805788+08:00",
-      "latency_ms": 2686.1,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T22:05:47.802157+08:00",
-      "latency_ms": 1933.0,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T23:03:59.494822+08:00",
-      "latency_ms": 2083.7,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T23:04:01.454797+08:00",
-      "latency_ms": 1896.8,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
-      "ts": "2026-06-08T23:04:03.498940+08:00",
-      "latency_ms": 1977.9,
-      "hit_count": 5,
-      "has_vector": true,
-      "error": null
-    },
-    {
       "ts": "2026-06-09T00:04:11.060535+08:00",
       "latency_ms": 2656.1,
       "hit_count": 5,
@@ -1585,6 +1417,48 @@
     {
       "ts": "2026-06-15T16:05:41.624966+08:00",
       "latency_ms": 1767.4,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-15T20:03:53.418638+08:00",
+      "latency_ms": 1818.1,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-15T20:03:55.305077+08:00",
+      "latency_ms": 1820.2,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-15T20:03:57.177778+08:00",
+      "latency_ms": 1790.9,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-16T00:03:54.535156+08:00",
+      "latency_ms": 2326.6,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-16T00:03:56.543361+08:00",
+      "latency_ms": 1943.8,
+      "hit_count": 5,
+      "has_vector": true,
+      "error": null
+    },
+    {
+      "ts": "2026-06-16T00:03:58.402997+08:00",
+      "latency_ms": 1799.1,
       "hit_count": 5,
       "has_vector": true,
       "error": null
