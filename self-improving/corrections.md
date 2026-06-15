@@ -911,3 +911,72 @@ _由 小龙虾 00:19 写入_
   - 可能是 cron / l0_watchdog 触发？或 Lee 自己在别处改？
   - 已被 drift-guard-state-history.jsonl 记录，未来可查
 
+
+---
+
+## dev_20260615_002：把"生成报告 → 转发给小马"理解成 3 Agent 协作任务
+
+- **时间**: 2026-06-15 11:00~11:30
+- **场景**: Lee 说"小龙虾，小马这家伙把向量搜索系统跑没了，你帮他重建下，给他技术报告"
+- **错误**: 我把"给他技术报告"误解成"我要远程帮小马 PC 端重建系统"
+- **实际意图**: Lee 只是想要一份 md 文件，他自己转给小马看
+- **浪费**: 4 轮澄清问题（误认主体 / 查小马 PC 物理不可达 / 问具体场景 / 问怎么推进），让 Lee 反复解释
+- **Lee 反馈**: "你又忘了你在云服务器上吗？！" + "我说的不是你的向量搜索系统，是小马的。" + "本来就是你的任务啊！"
+
+### 错误链路
+1. 听到"小马 + 跑没了"→ 触发 3 Agent 协作框架过度联想
+2. 没第一时间搜 MEMORY.md（小马是 PC 本地，物理不可达）
+3. 试 `message + attachments` 失败 → 试 `feishu_drive_file` 没返回 token → 试 `feishu_im_user_message file 类型` 报错 → 走 4 个工具后才 fallback paste 全文
+
+### Rule
+- **"转交给某人" = 生成内容 + 交付物，**不是**帮对方执行任务**
+- 收到"X 给 Y"类指令时，先识别动作主语：是「我（小龙虾）做完后给 Y」还是「我帮 Y 做」？模糊时**默认前者**（除非 Lee 明确说"帮 Y 处理"）
+- **发文件类指令的默认路径**：
+  1. `feishu_drive_file upload` 拿 file_token
+  2. `feishu_im_user_message` 走 file 消息 + file_key
+  3. **fallback：直接 paste 全文**（不要 3 选 1 让用户问）
+- **触发**：「转给 / 发给 / 让他看 / 给他 / 帮我转发」+ 目标人名 → 默认动作 = **生成内容 + 交付**，不主动介入对方的系统
+
+### Why
+- "小马 + 跑没了"这种描述**容易触发 3 Agent 协作框架过度联想**
+- 我**物理不可达 PC 端**，所以即使"帮小马重建"也是空话——Lee 早就知道这一点
+- Lee 明确说"本来就是你的任务"= 他要我**分担执行成本**（生成 md + 发送），不是**参与多 Agent 决策**
+
+### How to apply
+- 收到"X 给 Y 看" / "X 让 Y 用" 类指令：直接生成 X，不问"具体场景"
+- 发文件失败时**立刻 paste 全文**，不跳来跳去试 4 个工具
+- "我（小龙虾）做不到的事"（如访问 PC 端）→ 直接说明物理限制 + 给方案，不绕弯
+- 触发词联想：「小马 + 系统坏了」→ 第一反应是"Lee 想让我准备什么资料给他"而不是"我要远程修"
+
+- **置信度**: 95%（Lee 反馈清晰，4 轮对话全打脸）
+- **预防**: 在 SOUL.md 「红线条目」加一条："转交类指令"= 生成内容交付，不是介入对方系统
+
+---
+
+## dev_20260615_003：心跳 cron 引用旧路径（heartbeat-rules.md）
+
+- **时间**: 2026-06-15 14:38~14:45
+- **触发**: 跑 `check_openclaw_log.sh` 噪音过滤时发现真错
+- **症状**: OpenClaw log 报 `read failed: ENOENT ... /root/self-improving/heartbeat-rules.md`
+- **根因**: cron job `b9f146c4-d62b-4f30-b8aa-e64a4f930667` (heartbeat-maintenance) 的 payload.message 里硬编码 `~/self-improving/`，但实际文件在 `~/.openclaw/workspace/self-improving/`
+- **历史**: 这个问题在 5/24~6/3 之间已被多次发现（runs.jsonl 里"heartbeat-rules.md 缺失"出现 8+ 次），6/4 一次修正过但**回退**了——根因是直接编辑 `jobs.json` 文件，没通过 gateway 工具
+- **修复**: 用 `cron update` 工具改 payload.message → 路径改为 `~/.openclaw/workspace/self-improving/heartbeat-rules.md`
+- **验证**: `cron get` 返回 updatedAtMs=1781505588982，message 内已是新路径
+
+### Rule
+- **改 cron job 必须用 gateway 工具的 `cron update`**，不直接编辑 `jobs.json`（参见 cron-management.md）
+- **OpenClaw 内部 store ≠ `jobs.json` 文件**——`/root/.openclaw/cron/jobs.json` mtime 06-10 没动，但 OpenClaw runtime 状态是单独的（`cron get` 看的是真状态）
+- **路径用 `~` 是反模式**——`~` 在不同 context 展开可能不同（`/root/` vs `/home/ubuntu/`），**用绝对路径最稳**
+
+### Why
+- 6/4 修过一次但回退——根因是没走工具，文件 vs runtime 两套数据脱节
+- 这种"读不存在文件"在 ENOENT log 里很安静（不是 ERROR 堆栈，是单行警告），**纯靠 OpenClaw 自身 self-improving 抓不到**
+
+### How to apply
+- 改 cron 任务前先 `cron get jobId`，改完再 `cron get` 验证
+- 路径在 prompt 里**用绝对路径**（`/root/.openclaw/workspace/...`），别用 `~/`
+- `bash scripts/check_openclaw_log.sh` 加入 HEARTBEAT.md 第五步（数据链路健康检查），让"读不存在文件"类静默错误能被自动发现
+- 写 corrections.md 时**关联 OpenClaw log 时间戳**（不是只说"ENOENT"，要给出原始 log 行）
+
+- **置信度**: 100%（cron get 验证 + log 实测 + 历史 runs 交叉对照）
+- **预防**: HEARTBEAT.md 加 `check_openclaw_log.sh` 接入；cron 改走工具

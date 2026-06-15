@@ -112,6 +112,22 @@ python3 scripts/conversation_to_ontology.py --dry-run
 **C. Self-improving → Obsidian 归档**
 检查 `self-improving/corrections.md` 最近是否有新增（24小时内）。
 
+### 第五步 B：OpenClaw log 噪音过滤（2026-06-15 立，dev_20260615_003）
+
+**调用**：`bash scripts/check_openclaw_log.sh`
+
+**目的**：区分 model overload failover（噪音，自动恢复）vs 真错（如 ENOENT、超时、cron 失败）
+
+**判据**：
+- 噪音模式：`overloaded_error / failover_decision / model_fallback / candidate_failed / FailoverError: The AI service is temporarily overloaded`
+- `real_errors == 0` → 静默通过
+- `real_errors > 0` → 输出状态文件 `/tmp/openclaw_log_state_YYYY-MM-DD.json`，exit 1
+- 真错样本最多 5 条（head）
+
+**根因**：log 里"读不存在文件"类静默 ENOENT 不会触发 OpenClaw 自身报警，必须靠外部 cron/heartbeat 抓
+
+**接入位置**：嵌入 l0_watchdog.sh 顺带跑，或在 cron 心跳 4h 周期里手动调用
+
 ### 第六步：主动推送评估
 
 如果发现以下情况，主动向 Lee 推送：
