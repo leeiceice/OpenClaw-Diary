@@ -76,6 +76,72 @@ def append_history(data: dict, mode: str, override_cups: int = 0) -> dict:
     except Exception as e:
         return {"ok": False, "error": str(e), "path": str(HISTORY_FILE)}
 
+def backfill_history_if_needed(log: dict) -> dict:
+    """
+    启动自愈：检测 log 里的 records 是否都已同步进 history.jsonl
+    2026-06-15 Lee 拍板：防 log 已有但 history 缺失的失同步（如 6/14 覆盖补录漏写 bug）
+    - 用 records 里每条的 (date, ml, note) 元组比对
+    - 缺失的自动回填 1 条/每条
+    返回：{checked, missing_count, backfilled: [lines]}
+    """
+    if not log.get('records'):
+        return {"checked": 0, "missing_count": 0, "backfilled": []}
+
+    # 读 history 现存条目
+    existing = set()
+    if HISTORY_FILE.exists():
+        with open(HISTORY_FILE) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    e = json.loads(line)
+                    # 用 (date, ml_total) 作为去重 key
+                    existing.add((e.get('date'), e.get('ml_total'), e.get('note', '')))
+                except Exception:
+                    continue
+
+    backfilled = []
+    for rec in log['records']:
+        # 从 rec['time'] 拆 date（"2026-06-14 16:42" → "2026-06-14"）
+        rec_date = rec.get('time', '').split(' ')[0] if rec.get('time') else log.get('today')
+        rec_ml_total = rec.get('ml', 0)  # 单条记录的 ml（覆盖模式是总量，追加模式是增量）
+        rec_note = rec.get('note', '')
+        key = (rec_date, rec_ml_total, rec_note)
+        if key in existing:
+            continue
+        # 缺失 → 回填 1 条（最简形式，标 mode=backfill 避免和正常 append 混淆）
+        now_iso = datetime.now(CST).isoformat()
+        # rec 的真实时间（从 "YYYY-MM-DD HH:MM" 拼 ISO）
+        rec_dt = rec.get('time', '')
+        if rec_dt and len(rec_dt) >= 16:
+            try:
+                rec_ts = datetime.strptime(rec_dt, "%Y-%m-%d %H:%M").replace(tzinfo=CST).isoformat()
+            except Exception:
+                rec_ts = now_iso
+        else:
+            rec_ts = now_iso
+        entry = {
+            "ts": rec_ts,
+            "date": rec_date,
+            "time": rec_dt.split(' ')[1] if ' ' in rec_dt else '',
+            "ml": rec_ml_total,
+            "cups_total": log.get('cup_count', 0),  # 近似值
+            "ml_total": rec_ml_total,
+            "mode": "backfill",
+            "note": f"[自愈补录] {rec_note}" if rec_note else "[自愈补录]",
+        }
+        line = json.dumps(entry, ensure_ascii=False)
+        try:
+            with open(HISTORY_FILE, 'a') as f:
+                f.write(line + '\n')
+            backfilled.append(line)
+            existing.add(key)
+        except Exception as e:
+            print(f"[backfill] ⚠️ 写入失败:{e}", file=sys.stderr)
+    return {"checked": len(log['records']), "missing_count": len(backfilled), "backfilled": backfilled}
+
 def is_water_message(text: str) -> bool:
     text_lower = text.lower()
     keywords = ["喝了一杯", "一杯", "一杯水", "两杯", "三杯", "四杯", "五杯", "六杯",
@@ -282,6 +348,11 @@ if __name__ == '__main__':
 
     log = load_log()
     today = datetime.now(CST).strftime("%Y-%m-%d")
+
+    # 2026-06-15 Lee 拍板：启动自愈——log 有但 history 没的 records 自动回填
+    bres = backfill_history_if_needed(log)
+    if bres['missing_count'] > 0:
+        print(f"[backfill] 自愈补录 {bres['missing_count']}/{bres['checked']} 条 → {HISTORY_FILE}")
 
     if log.get('today') != today:
         log = {"today": today, "total_ml": 0, "cup_count": 0,
