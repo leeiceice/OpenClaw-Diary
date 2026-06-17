@@ -1,9 +1,0 @@
-{
-  "timestamp": "2026-06-12T10:06:01.812602+08:00",
-  "logic": "997 备选 - 7 交集 = 990 干净书库;验证 294 本书架独有未污染 997",
-  "books_total_origin": 997,
-  "shelf_total": 301,
-  "intersection_removed": 7,
-  "shelf_only_not_polluting": 294,
-  "books_final": 990
-}
